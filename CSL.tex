@@ -1,0 +1,98 @@
+\documentclass[a4paper,UKenglish,cleveref, autoref, thm-restate]{lipics-v2021}
+
+\bibliographystyle{plainurl}% the mandatory bibstyle
+
+\input{mycommands-CSL.tex}
+\input{phead.tex}
+\input{mypackages}
+\usepackage{doc}
+\usepackage{tikz}
+\usetikzlibrary{positioning, quotes}
+
+\title{Playing with modalities}
+
+\titlerunning{Playing with modalities}
+
+
+\author{Elaine Pimentel\footnote{Corresponding author.}}{Computer Science Department UCL, UK \and \url{https://sites.google.com/site/elainepimentel/} }{e.pimentel@ucl.ac.uk}{https://orcid.org/0000-0002-7113-0801}{Pimentel has received funding from the European Union's Horizon 2020 research and innovation programme under the Marie Sk\l odowska-Curie grant agreement Number 101007627 and by the Leverhulme Project ECUMENICAL.}
+
+\author{Carlos Olarte}{LIPN, CNRS UMR 7030, Universit\'{e} Sorbonne Paris Nord, France \and \url{https://sites.google.com/site/carlosolarte/} }{olarte@lipn.univ-paris13.fr}{https://orcid.org/0000-0002-7264-7773}{The work of Olarte has been partially supported by the SGR project PROMUEVA (BPIN
+2021000100160) under the supervision of Minciencias (Ministerio de Ciencia Tecnolog\'ia e Innovaci\'on, Colombia). Olarte acknowledge also support from the NATO
+Science for Peace
+and Security Programme through grant number G6133 (project SymSafe). }
+
+\author{Timo Lang}{Computer Science Department UCL, UK}{}{}{}
+
+\author{Robert Freiman}{TU-Wien, Austria}{robert@logic.at}{}{}{}
+
+\author{Chris Ferm\"{u}ller}{TU-Wien, Austria}{chrisf@logic.at}{}{}{}
+
+\authorrunning{E. Pimentel, C. Olarte, T. Lang, R. Freiman and C. Fehrm\"{u}ller} %TODO mandatory. First: Use abbreviated first/middle names. Second (only in severe cases): Use first author plus 'et al.'
+
+\Copyright{E. Pimentel, C. Olarte, T. Lang, R. Freiman and C. Fehrm\"{u}ller} %TODO mandatory, please use full first names. LIPIcs license is "CC-BY";  http://creativecommons.org/licenses/by/3.0/
+
+\ccsdesc[500]{Theory of computation~Proof theory}
+\ccsdesc[500]{Theory of computation~Game semantics}
+
+%
+%\ccsdesc[100]{\textcolor{red}{Replace ccsdesc macro with valid one}} %TODO mandatory: Please choose ACM 2012 classifications from https://dl.acm.org/ccs/ccs_flat.cfm 
+
+\keywords{Linear logic, modal logic, proof theory, game semantics} %TODO mandatory; please add comma-separated list of keywords
+
+\category{Invited Talk} 
+
+\relatedversion{} %optional, e.g. full version hosted on arXiv, HAL, or other respository/website
+%\relatedversiondetails[linktext={opt. text shown instead of the URL}, cite=DBLP:books/mk/GrayR93]{Classification (e.g. Full Version, Extended Version, Previous Version}{URL to related version} %linktext and cite are optional
+
+%\supplement{}%optional, e.g. related research data, source code, ... hosted on a repository like zenodo, figshare, GitHub, ...
+%\supplementdetails[linktext={opt. text shown instead of the URL}, cite=DBLP:books/mk/GrayR93, subcategory={Description, Subcategory}, swhid={Software Heritage Identifier}]{General Classification (e.g. Software, Dataset, Model, ...)}{URL to related version} %linktext, cite, and subcategory are optional
+
+%\funding{(Optional) general funding statement \dots}%optional, to capture a funding statement, which applies to all authors. Please enter author specific funding statements as fifth argument of the \author macro.
+
+%\acknowledgements{I want to thank \dots}
+
+\EventEditors{}
+\EventNoEds{2}
+\EventLongTitle{}
+\EventShortTitle{CSL 2025}
+\EventAcronym{CSL}
+\EventYear{2025}
+\EventDate{}
+\EventLocation{Amsterdam, The Netherlands}
+\EventLogo{}
+\SeriesVolume{}
+\ArticleNo{}
+
+\begin{document}
+
+\maketitle
+
+%TODO mandatory: add short abstract of the document
+\begin{abstract}
+In this work, we will explore modalities through dialogical game lenses. Games provide a powerful tool for bridging the gap between intended and formal semantics, often offering a more conceptually natural approach to logic than traditional model-theoretic semantics.
+
+We begin by examining substructural calculi from a game semantic perspective, guided by intuitions about resource-conscious, and more specifically, cost-conscious reasoning. The game comes into full swing as we introduce cost labels to assumptions and a corresponding budget. Different proofs of the same end-sequent are interpreted as strategies for a player to defend a claim, which vary in cost. This leads to a labelled calculus, which can be viewed as a fragment of Subexponential Linear Logic ($SELL$). We then generalize the concept of costs in proofs by employing a semiring structure, illustrating this interpretation with examples, and investigating some proof-theoretical properties.
+
+The second part of the talk will focus on the modal logic PNL, which involves Kripke frames with two types of disjoint and symmetric reachability relations. This is motivated by the study of group polarization, where the opinions or beliefs of individuals within a group become more extreme or polarized after interaction. Our approach to reasoning about group polarization is based on PNL and highlights a different aspect of formal reasoning about the corresponding models -- using games and proof systems.
+\end{abstract}
+
+\section{Introduction}\label{sec:introduction}
+%\input{introduction}
+%
+%\input{semantics}
+%\input{prelim-pnl}
+%\input{sem-game}
+%\input{dis-game}
+%\input{st-proofs}
+%\input{/complexity}
+%\input{calculus.tex}
+%\input{extensions}
+%\input{pt}
+%
+%\section{Concluding Remarks}\label{sec:conc}
+%\input{./concluding}
+
+\bibliography{references}
+\end{document}
+
+\end{document}
