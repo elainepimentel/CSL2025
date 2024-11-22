@@ -155,18 +155,69 @@ The following play illustrate that $n=3$ suffices, where $F=(w\tensor w)\oplus(b
 \end{enumerate}
 Observe that the other possible choices for $\II$ are similar or simpler. 
 \end{example}
-
-\blue{EP. Stopped here.}
-
-Taking these observations together, one can prove the following:
-
-\begin{theorem}[Weak adequacy for $\GAIMALLR$]
+We note that it is not necessary to consider all possible strategies in $\GAIMALLR$: For example, \I never needs to take the budget into account when deciding the next move. It is easy to see that a~$\aIMALLR$-proof $\pr$ of a sequent $S$ translates to a w.s. in $(S,b)$ for some \textit{sufficiently large} budget $b$. Taking these observations together, one can prove the following.
+\begin{theorem}[Weak adequacy for $\GAIMALLR$~\cite{DBLP:conf/tableaux/LangOPF19}]
 \label{theorem:wadeq}
 Let $S$ be a sequent. Then
 
 $\exists b\left(\wins{}{\GAIMALLR}(\{S\},b)\right)\quad\iff\quad\vdash_{\aIMALLR} S$
 \end{theorem}
-The proof is similar to the one of Theorem \ref{theorem:adeq1}. We call this theorem \emph{weak} adequacy since information about the budget $b$ is lost in the proof theoretic representation. In other words, the game $\GAIMALLR$ is more expressive than the calculus $\aIMALLR$.
-To overcome this discrepancy, we now introduce a  labelled extension of $\aIMALLR$ that we call $\laIMALLR$. A $\laIMALLR$-proof is build from labelled sequents $\Gamma\lra_b A$ where $\Gamma\lra A$ is an extended sequent and $b\in\real^+$. The complete system is given in Fig. \ref{fig:lll}. 
-Our aim is to prove that
-$\wins{}{\GAIMALLR}(\{\Gamma\lra A\},b)\quad\iff\quad\vdash_{\laIMALLR} \Gamma\lra_b A$.
+This is a \emph{weak} adequacy since information about the budget $b$ is lost in the proof theoretic representation. In other words, the game $\GAIMALLR$ is more expressive than the calculus $\aIMALLR$.
+To overcome this discrepancy, we introduce a  labelled extension of $\aIMALLR$ that we call $\laIMALLR$. A $\laIMALLR$-proof is build from labelled sequents $b: \Gamma\seq A$ where $\Gamma\seq A$ is a sequent and $b\in\real^+$. The complete system is given in Fig. \ref{fig:lll}. 
+\begin{figure}[t]
+{
+\[
+\begin{array}{c}
+\hline\mbox{labelled sequent system for }\laIMALLR\\\hline\\
+ \infer[\tensor_L]{b: \Gamma, A \tensor B \seq C}
+{b: \Gamma, A, B \seq C} 
+\quad 
+\infer[\tensor_R]{a+b:\nbang{}\Gamma,\Delta_1, \Delta_2 \seq A\tensor B}
+{a:\nbang{}\Gamma,\Delta_1 \seq A & b:\nbang{}\Gamma,\Delta_2 \seq B}
+\\\\
+\infer[\lolli_L]{a+b:\nbang{}\Gamma,\Delta_1, \Delta_2, A \lolli B \seq C}
+{a:\nbang{}\Gamma,\Delta_1 \seq A & b:\nbang{}\Gamma,\Delta_2, B \seq C}
+\quad 
+\infer[\lolli_R]{b:\Gamma \seq A \lolli B}{b:\Gamma, A \seq B}
+\\\\
+ \infer[\with_{L_i}]{b:\Gamma, A_1 \with A_2 \seq B}
+{b:\Gamma, A_i\seq B} 
+\quad 
+\infer[\with_R]{\max\{a,b\}: \Gamma \seq A \with B}
+{a:\Gamma \seq A & b:\Gamma \seq B}
+\\\\
+\infer[\oplus_L]{\max\{a,b\}:\Gamma, A \oplus B \seq C}
+{a:\Gamma, A \seq C & b:\Gamma, B \seq C}
+\quad 
+\infer[\oplus_{R_i}]{b:\Gamma \seq A_1 \oplus A_2}{b:\Gamma \seq A_i}
+\\\\
+\infer[\nbang{}_L]{c+a:\Gamma,\nbang{a}A\seq C}{c:\Gamma,\nbang{a}A,A\seq C}
+\\\\
+  \infer[I]{0:\Gamma,p \seq p}{} 
+ \qquad
+\infer[\one_R]{0:\Gamma \seq \one}{}
+\qquad 
+\infer[\zero_L]{0: \Gamma,\zero\seq A}{}
+\qquad 
+\infer[w_{\ell} (b\geq a)]{b: \Gamma\seq A}{a:\Gamma\seq A}
+\end{array}
+\]}\caption{The labelled sequent system $\laIMALLR$}
+\label{fig:lll}
+\end{figure}
+Now we can  prove the desired correspondence.
+\begin{theorem}[strong adequacy for $\GAIMALLR$~\cite{DBLP:conf/tableaux/LangOPF19}]
+\label{theorem:adeq2}
+$\wins{}{\GAIMALLR}(\{\Gamma\seq A\},b)\quad\iff\quad\vdash_{\laIMALLR}b: \Gamma\seq A$. 
+\end{theorem}
+This result can be made even stronger: in fact, proofs (and games) can be given a minimal budget:
+given a proof $\pr$ of a sequent, just assign the label $0$ to all initial sequents 
+of $\pr$ and propagate the labels downwards according to the rules of $\laIMALLR$. This minimal budget will be called {\em the cost} os $\pr$, denoted by $\costs{\pr}$.
+
+But the big picture is even more interesting: cost-optimal strategies for all provable sequents exist
+\begin{theorem}\label{cor:spectrum}[\cite{DBLP:conf/tableaux/LangOPF19}]
+There is a smallest $b$ such that $\vdash_{\laIMALLR}\Gamma\lra_b A$.
+\end{theorem}
+We note that the proof of this result is not constructive.
+
+
+
