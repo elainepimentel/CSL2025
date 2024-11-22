@@ -7,12 +7,12 @@ Our starting point is a calculus for \emph{affine intuitionistic linear logic} (
  \oplus A_2 \mid   A_1 \tensor A_2
   \mid A_1 \lolli A_2\mid \bang A.
 \]
-with a denumerable infinite set of propositional variables $\{p, q, r, \ldots\}$, the unities $\{\zero,\one\}$,  the binary connectives for additive conjunction and disjunction $\{\with,\oplus\}$, the multiplicative conjunction $\tensor$, the  linear implication $\lolli$ and the exponential $\bang$.
+with a denumerable infinite set of propositional variables $\{p, q, r, \ldots\}$, the unities\co{units?} $\{\zero,\one\}$,  the binary connectives for additive conjunction and disjunction $\{\with,\oplus\}$, the multiplicative conjunction $\tensor$, the  linear implication $\lolli$ \co{I'd add ``,'' and...}and the exponential $\bang$.
 
 Similar to modal connectives, the exponential $\bang$ in intuitionistic linear logic  is not {\em canonical}~\cite{DBLP:conf/kgc/DanosJS93}, in the sense that, even having the same scheme for introduction rules, marking the exponentials with different labels  does not preserve equivalence. That is, if  $i\not= j$ then
-$\nbang{i}A\not\equiv\nbang{j}A$.
+$\nbang{i}A\not\equiv\nbang{j}A$.\co{Link break doesn't seem to be needed here?}
 
-Intuitively, this means that we can mark the exponential with {\em labels} taken from a set $\mathcal{I}$ organized in a pre-order $\preceq$ (\ie, reflexive and transitive), obtaining (possibly infinitely-many) exponentials ($\nbang{i}$
+Intuitively, this means that we can mark the exponential with {\em labels} taken from a set $\mathcal{I}$ organized in a pre-order $\preceq$ (\ie, a reflexive and transitive relation), obtaining (possibly infinitely-many) exponentials ($\nbang{i}$
 %,\nquest{i}$ 
 for $i\in\mathcal{I}$).
 Also as in multi-modal systems, the pre-order  determines the provability relation: 
@@ -21,9 +21,9 @@ for a general formula $A$, $\nbang{b}A$ {\em implies} $\nbang{a}A$ iff $a \prece
 Pre-ordering the labels (together with an upward closeness requirement)
 guarantees cut-elimination~\cite{DBLP:journals/jar/NigamM10}. 
 
-The algebraic structure of subexponentials, combined with their intrinsic structural property allow for the proposal of rich linear logic based frameworks. This opened a venue for proposing different multi-modal substructural logical systems, that encountered a number of different applications, see~\cite{DBLP:conf/fscd/PimentelON21} for a survey.
+The algebraic structure of subexponentials, combined with their intrinsic structural property allow for the proposal of rich linear logic based frameworks. This opened a venue for proposing different multi-modal substructural logical systems, that encountered a number of different applications (see~\cite{DBLP:conf/fscd/PimentelON21} for a survey). 
 
-In this paper, we will use subexponentials to model the notion of {\em costs}. We will start by considering the particular case where labels will be elements of $\real^+$, the set of non-negative real numbers. Formally, we substitute in $\aILL$
+In this paper, we will use subexponentials to model the notion of {\em costs}. We will start by considering the particular case where labels will be elements of $\real^+$ (non-negative real numbers), the set of non-negative real numbers. Formally, we substitute in $\aILL$
 %our language 
 the exponential $\bang$ by the unary modal operators $\nbang{a}$ 
 for each $a\in\real^+$. 
