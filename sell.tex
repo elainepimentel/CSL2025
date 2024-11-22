@@ -23,7 +23,7 @@ guarantees cut-elimination~\cite{DBLP:journals/jar/NigamM10}.
 
 The algebraic structure of subexponentials, combined with their intrinsic structural property allow for the proposal of rich linear logic based frameworks. This opened a venue for proposing different multi-modal substructural logical systems, that encountered a number of different applications (see~\cite{DBLP:conf/fscd/PimentelON21} for a survey). 
 
-In this paper, we will use subexponentials to model the notion of {\em costs}. We will start by considering the particular case where labels will be elements of $\real^+$ (non-negative real numbers), the set of non-negative real numbers. Formally, we substitute in $\aILL$
+In this paper, we will use subexponentials to model the notion of {\em costs}. We will start by considering the particular case where labels will be elements of $\real^+$, the set of non-negative real numbers. Formally, we substitute in $\aILL$
 %our language 
 the exponential $\bang$ by the unary modal operators $\nbang{a}$ 
 for each $a\in\real^+$. 
@@ -37,7 +37,7 @@ Sequents have the form $\Gamma\seq C$ where subformulas $\nbang{a}A$ will have a
 We denote by $\nbang{}\Gamma$ a set of formulas  prefixed with $\nbang{a}$ for some (not necessarily the same) $a\in\real^+$. 
 
 The rules for the system $\aIMALLR$ are depicted in Fig.~\ref{fig:ll}. Note that the cut rule is not included in our presentation of $\aIMALL$ and that weakening is present only implicitly, via the context $\Gamma$ in the initial sequents. Furthermore, in rule $I$, $p$ is a propositional variable and there is no right rule for $\nbang{}$ in $\aIMALLR$ since they only appear in negative polarity.
-We shall write $\vdash_{\aIMALLR} S$ if the sequent $S$ is provable in $\aIMALLR$.
+We shall write $\vdash_{\aIMALLR} S$ if the sequent $S$ is provable in $\aIMALLR$.\co{There is a problem with the rule for zero}
 
 \begin{figure}[t]
 \resizebox{\textwidth}{!}{
@@ -88,24 +88,24 @@ only one premise: \I moves to the premise sequent of the corresponding introduct
 \begin{enumerate}[i.]
 \item player \II
 chooses 
-a premise sequent in which the game continues (if the rule has more than one premise).
+a premise sequent in which the game continues (if the rule has more than one premise).\co{This sentence in parenthesis is not needed}
 \item  the game splits into independent subgames, all of
-which player \I has to win. 
+    which player \I has to win. \co{subgames, where \I has to win all of them if she want to win the game}
 \end{enumerate}
 \end{itemize}
 
 The choice between $(i)$ and $(ii)$ depends on the nature of the rule:
 branching
-in {\em additive rules} is modeled as choices of \II, whereas in branching {\em multiplicative rules},  \I   splits the context into two disjoint parts,
+in {\em additive rules} is modeled as choices of \II, whereas in\co{Check this in... branching in??} branching {\em multiplicative rules},  \I   splits the context into two disjoint parts,
 which then form the corresponding contexts of two  subgames to
 be played in parallel. Consequently, a state of the game is represented
 by a \textit{multiset of sequents}, each belonging to a separate subgame. 
 
-Now, in order to capture the notion of {\em costs},  game states  will also involve a {\bf budget} (modeled as a real number) which will decrease whenever rule $\nbang{}_L$ is invoked. 
+Now, in order to capture the notion of {\em costs},  game states  will also involve a {\bf budget} (modeled as a real number) which will decrease whenever rule $\nbang{}_L$ is invoked\co{Invoked -> applied. Also, you can add ``This means that there is a `cost' $r$ in dereliction, i.e., when unpacking a formula `stored' in the modalitiy $\nbang{r}{}$}
 
 Formally we have the following.
 \begin{definition}[The game $\GAIMALLR$]\label{definition:GAIMALLR}
-$\GAIMALLR$ is a game of two players, \I and \II. Game states are tuples $(H,b)$, where $H$ is a finite multiset of extended sequents and $b\in\real$ is a ``budget''.
+    $\GAIMALLR$ is a game of two players, \I and \II. Game states are tuples $(H,b)$, where $H$ is a finite multiset of extended sequents\co{Not defined yet} and $b\in\real$ is a ``budget''.
 $\GAIMALLR$ proceeds in rounds, initiated by \I's selection of an extended sequent $S$ from the current game state. The successor state is determined according to rules that fit one of the two following schemes:
 
 \[
