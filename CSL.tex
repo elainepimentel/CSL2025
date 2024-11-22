@@ -3,7 +3,6 @@
 \bibliographystyle{plainurl}% the mandatory bibstyle
 
 \input{mycommands-CSL.tex}
-\input{phead.tex}
 \input{mypackages}
 \usepackage{doc}
 \usepackage{tikz}
@@ -31,9 +30,29 @@ and Security Programme through grant number G6133 (project SymSafe). }
 
 \Copyright{E. Pimentel, C. Olarte, T. Lang, R. Freiman and C. Fehrm\"{u}ller} %TODO mandatory, please use full first names. LIPIcs license is "CC-BY";  http://creativecommons.org/licenses/by/3.0/
 
-\ccsdesc[500]{Theory of computation~Proof theory}
-\ccsdesc[500]{Theory of computation~Game semantics}
+\begin{CCSXML}
+<ccs2012>
+   <concept>
+       <concept_id>10003752.10003790.10003801</concept_id>
+       <concept_desc>Theory of computation~Linear logic</concept_desc>
+       <concept_significance>500</concept_significance>
+       </concept>
+   <concept>
+       <concept_id>10003752.10003790.10003793</concept_id>
+       <concept_desc>Theory of computation~Modal and temporal logics</concept_desc>
+       <concept_significance>500</concept_significance>
+       </concept>
+   <concept>
+       <concept_id>10003752.10003790.10003792</concept_id>
+       <concept_desc>Theory of computation~Proof theory</concept_desc>
+       <concept_significance>500</concept_significance>
+       </concept>
+ </ccs2012>
+\end{CCSXML}
 
+\ccsdesc[500]{Theory of computation~Linear logic}
+\ccsdesc[500]{Theory of computation~Modal and temporal logics}
+\ccsdesc[500]{Theory of computation~Proof theory}
 %
 %\ccsdesc[100]{\textcolor{red}{Replace ccsdesc macro with valid one}} %TODO mandatory: Please choose ACM 2012 classifications from https://dl.acm.org/ccs/ccs_flat.cfm 
 
@@ -51,17 +70,17 @@ and Security Programme through grant number G6133 (project SymSafe). }
 
 %\acknowledgements{I want to thank \dots}
 
-\EventEditors{}
+\EventEditors{J\"{o}rg Endrullis and Sylvain Schmitz}
 \EventNoEds{2}
-\EventLongTitle{}
+\EventLongTitle{33rd EACSL Annual Conference on Computer Science Logic (CSL 2025)}
 \EventShortTitle{CSL 2025}
 \EventAcronym{CSL}
 \EventYear{2025}
-\EventDate{}
-\EventLocation{Amsterdam, The Netherlands}
+\EventDate{February 10--14, 2025}
+\EventLocation{Amsterdam, Netherlands}
 \EventLogo{}
-\SeriesVolume{}
-\ArticleNo{}
+\SeriesVolume{326}
+\ArticleNo{4}
 
 \begin{document}
 
@@ -73,14 +92,16 @@ In this work, we will explore modalities through dialogical game lenses. Games p
 
 We begin by examining substructural calculi from a game semantic perspective, guided by intuitions about resource-conscious, and more specifically, cost-conscious reasoning. The game comes into full swing as we introduce cost labels to assumptions and a corresponding budget. Different proofs of the same end-sequent are interpreted as strategies for a player to defend a claim, which vary in cost. This leads to a labelled calculus, which can be viewed as a fragment of Subexponential Linear Logic ($SELL$). We then generalize the concept of costs in proofs by employing a semiring structure, illustrating this interpretation with examples, and investigating some proof-theoretical properties.
 
-The second part of the talk will focus on the modal logic PNL, which involves Kripke frames with two types of disjoint and symmetric reachability relations. This is motivated by the study of group polarization, where the opinions or beliefs of individuals within a group become more extreme or polarized after interaction. Our approach to reasoning about group polarization is based on PNL and highlights a different aspect of formal reasoning about the corresponding models -- using games and proof systems.
+The second part of the paper will focus on the modal logic PNL, which involves Kripke frames with two types of disjoint and symmetric reachability relations. This is motivated by the study of group polarization, where the opinions or beliefs of individuals within a group become more extreme or polarized after interaction. Our approach to reasoning about group polarization is based on PNL and highlights a different aspect of formal reasoning about the corresponding models -- using games and proof systems.
 \end{abstract}
 
-\section{Introduction}\label{sec:introduction}
-%\input{introduction}
-%
-%\input{semantics}
-%\input{prelim-pnl}
+\section{Introduction}\label{sec:intro}
+\input{intro}
+
+\section{A game model for costs}\label{sec:sell}
+\input{sell}
+\section{About cut-admissibility}\label{sec:cut}
+\input{cut}
 %\input{sem-game}
 %\input{dis-game}
 %\input{st-proofs}
