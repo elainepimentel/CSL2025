@@ -1,111 +1,158 @@
 %!TEX root = CSL.tex
 
 We begin by noting that establishing cut-admissibility in $\laIMALLR$ critically relies on the ability to define a computable function $f$ that relates the cost of the end-sequent to the labels of the premises in the cut rule.
-
-Given that exponentials occur only negatively in $\laIMALLR$, no cut steps involve banged formulas. This enables us to demonstrate that $f(a,b) = a + b$ is the {\em minimal} such function.
+%
+Given that exponentials only occur negatively in $\laIMALLR$, no cut steps involve banged formulas. This enables us to demonstrate that $f(a,b) = a + b$ is the {\em minimal} such function.
 \begin{theorem}[Negative-cut~\cite{DBLP:conf/tableaux/LangOPF19}]\label{thm:cutAdm}
 For $f(a,b)=a+b$, the following cut rule is admissible in $\laIMALLR$:
-\[
-\infer[cut_\ell]{\pnbang{}\Gamma,\Delta_1,\Delta_2\lra_{f(a,b)} C}
-	{ \pnbang{}\Gamma,\Delta_1\lra_a A &
-	\pnbang{}\Gamma,\Delta_2,A\lra_b C
+$$
+\infer[cut_\ell]{f(a,b): \nbang{}\Gamma,\Delta_1,\Delta_2\seq C}
+	{a: \nbang{}\Gamma,\Delta_1\seq A &
+	b:\nbang{}\Gamma,\Delta_2,A\seq C
 	}
-\]
+$$
 Moreover, whenever $cut_\ell$ is admissible w.r.t. a given $f'$, then $a+b\leq f'(a,b)$.
 \end{theorem}
-
 It turns out that extending cost-conscious reasoning to modalities occurring {\em positively} in sequents is far from straightforward.
-
-While an intuitive game-theoretic interpretation of promotion could be provided in the style of~\cite{DBLP:conf/tableaux/FermullerL17}, this {\em does not} align with a proof-theoretic notion of cut-elimination. This is due to the inherent difficulty in defining a functional notion of the cut-label, as demonstrated below.
+%
+While an intuitive game-theoretic interpretation of promotion could be provided in the style of~\cite{DBLP:conf/tableaux/FermullerL17}, this {\em does not} align with a proof-theoretic notion of cut-admissibility. This is due to the inherent difficulty in defining a functional notion of the cut-label, as demonstrated below.
 
 Let  
 \laSELLR  be the system resulting from \laIMALLR~ by 
 adding the following \emph{labelled promotion rule}
-\[
-\infer{b:\Gamma\seq \nbang{a} A}{b:\Gamma^{\leqn{a}}\seq A}
-\]
+$$
+\infer[\nbang{a}_R]{b:\Gamma\seq \nbang{a} A}{b:\Gamma^{\leqn{a}}\seq A}
+$$
 where $\Gamma^{\leqn{a}}$ denotes all formulas in $\Gamma$ which are of the form $\nbang{c} B$  and $a \geq c$. 
 
+The question that arises is whether the cut-admissibility result can be extended to \laSELLR.
+%
+To address this, consider the following derivation:
+$$
+\infer[cut]{b_1+b_2+a:\,\Delta\seq C}
+	{\infer[\nbang{a}_R]{b_1:\,\seq \nbang{a} A}{\deduce{b_1:\,\seq A}{}}
+	&
+	\infer[\nbang{a}_L]{b_2+a:\Delta,\nbang{a}A\seq C}
+		{\deduce{b_2:\Delta,\nbang{a}A,A\seq C}{}}
+	}
+$$
+This is usually reduced to
+$$
+\infer[cut]{2b_1+b_2:\Delta\seq C}
+	{\deduce{b_1:\,\seq A}{} &
+	\infer[cut]{b_1+b_2:\Delta,A\seq C}
+	 	{\deduce{b_1:\,\seq \nbang{a} A}{} &
+	 	\deduce{b_2:\Delta,\nbang{a}A,A\seq C}{}
+	 	}
+	}
+$$
+where the upper cut has a smaller rank, and the lower cut has a smaller degree than the original cut. However, this approach fails in the labelled setting because, in $a < b_1$, the label increases.
 
-The following result demonstrates that it is impossible to define a labelled cut rule for \laSELLR\ where the label of the conclusion depends solely on the labels of the premises. We include the remarkable proof by Timo Lang, as it is highly insightful.
+Although alternative reduction methods could be explored, the following result shows that it is impossible to define a labelled cut rule for \laSELLR\ where the label of the conclusion depends solely on the labels of the premises. We include the remarkable proof by Timo Lang, as it is highly insightful.
 \begin{theorem}[Impossible-cut~\cite{DBLP:conf/tableaux/LangOPF19}]\label{thm:impossible} There is no function $f:\real^+\times \real^+\rightarrow\real^+$ such that the rule
-\[
+$$
 \infer[cut]{f(a,b)\nbang{}\Gamma,\Delta_1,\Delta_2\seq C}
 	{a: \nbang{}\Gamma,\Delta_1\seq A &
 	b:\nbang{}\Gamma,\Delta_2,A\seq C
 	}
-\]
+$$
 is admissible in $\laSELLR$.
 \end{theorem}
 \begin{proof}
 Let $p,q$ be different propositional variables, and let $A^{\tensor n}$ denote the $n$-fold multiplicative conjunction of a formula $A$. The sequents
-\[a:\nbang{1/k}p\seq\nbang{1/k}p^{\otimes (k\cdot a)}\qquad\text{and}\qquad b:\nbang{1/k}p^{\otimes (k\cdot a)}\seq p^{\otimes(k\cdot k\cdot a\cdot b)} 
-\]
+$$a:\nbang{1/k}p\seq\nbang{1/k}p^{\otimes (k\cdot a)}\qquad\text{and}\qquad b:\nbang{1/k}p^{\otimes (k\cdot a)}\seq p^{\otimes(k\cdot k\cdot a\cdot b)} 
+$$
 are provable in $\laSELLR$ for all natural numbers $a,b,k$. The smallest label~$f$ which makes their cut conclusion
 $f: \nbang{1/k}p\seq p^{\otimes(k\cdot k\cdot a\cdot b)}
 $ 
 provable in~$\laSELLR$ is~$k\cdot a\cdot b$, which is not a function on the premise labels~$a,b$.
 \end{proof}
 
-\blue{EP stopped here.}
+\noindent
+%While it is clear that if one can assign infinite costs to sequents then cut would be trivially admissible in $\laSELLR$, this still does not define a computable function relating the labels of the premises and the conclusion of the cut rule.
 %In order to tackle this problem, we intend to mark cut-formulas with a certain {\em cost memory}, so to be able to keep track of accumulated costs.
+
+The theorem above indicates that, to find an admissible labelled cut rule, we must either:
+\begin{enumerate}
+\item restrict the form of the cut formula;
+\item allow the labelling function $f$ to incorporate more information from the premises than just their labels;
+\item change the concept of cut.
+\end{enumerate}
+
+
+
 We shall explore next
 different fragments and (admissible) cut-like rules that can be proposed for such a calculus. 
+\subsection{Infinite costs}
+We start by observing that the inclusion of ``worse costs'' entails a trivial labelling 
+that makes cut admissible. Let $\cRpi$ be the completion of $\cRp$ with $\infty$ and $\laSELLRi$ the corresponding labeled proof system with {\em decreasing} for $b\leq a$ being defined as follows:
+\begin{itemize}
+\item If $a,b\not=\infty$, $a - b$ is defined as usual;
+\item If $a=\infty$, then $a - b=\infty$.
+ \end{itemize}
+In the following theorem,  the cut formula $F$ is an arbitrary formula (containing, possibly, positive and/or negative occurrences of 
+the modality $\nbang{a}$). 
 
-We start by observing that the inclusion of ``worse costs''  ($\infty$ in the reals, $\botA$ in the semiring) entails a trivial labelling 
-that makes cut admissible. In the following theorem,  the cut formula $F$ is an arbitrary formula (containing, possibly, positive and/or negative occurrences of 
-the modalities $\pnbang{a}$ or $\vnbang{a}$). 
-
-\begin{theorem}[$cut_\infty$ Rule]
-The following rule is admissible in $\laSELLK$
-\[
-\infer[cut_\infty]{\pnbang{}\Gamma,\Delta_1,\Delta_2 \lraS{\infty} C}{
- \deduce{\pnbang{}\Gamma,\Delta_1 \lraS{a} F}{}&
-  \deduce{\pnbang{}\Gamma,\Delta_2, F \lraS{b} C}{}
+\begin{theorem}[Infinite-cut]
+The following rule is admissible in $\laSELLRi$
+$$
+\infer[cut_\infty]{\infty: \nbang{}\Gamma,\Delta_1,\Delta_2 \seq C}{
+ \deduce{a: \nbang{}\Gamma,\Delta_1 \seq F}{}&
+  \deduce{b:\nbang{}\Gamma,\Delta_2, F \seq C}{}
  }
-\]
+$$
 \end{theorem}
-The proof follows the same steps of the cut-elimination proof for \SELL, 
+The proof follows the same steps of the cut-elimination proof for $\SELL$~\cite{DBLP:conf/kgc/DanosJS93,DBLP:journals/jar/NigamM10}, 
 using natural extensions of invertibility and permutability of rules to the labelled case.
 
-It is worth noticing that the sole responsible for the impossibility result of Thm.~\ref{thm:impossible} is the explosive combination of the use of tensor/implication and contraction, that is, \SELL's multiplicative-(sub)exponential fragment. Hence, limiting the occurrence of one or the other leads to more amenable results.
-For example, Thm. \ref{thm:cutAdm} can be straightforwardly 
-extended for 
-formulas not containing the modality $\pnbang{a}$ (but $\vnbang{a}$ may occur). 
+Observe that this still does not define a computable function relating the labels of the premises and the conclusion of the cut rule.
+\subsection{Linearity}
+%It is worth noticing that the sole responsible for the impossibility result of Thm.~\ref{thm:impossible} is the explosive combination of the use of tensor/implication and contraction, that is, the multiplicative-sub-exponential fragment. Hence, limiting the occurrence of one or the other leads to more amenable results.
 
-\begin{theorem}[Linear cuts]
+We will now show cases of restricting the form of the cut formula, starting with the case where the cut formula is $!$-free. 
+\begin{theorem}[Linear-cut]
 Let $F$ be a formula with no occurrences of 
-$\pnbang{a}$. Then, the following rule is admissible in $\laSELLK$
-\[
-\infer[cutL]{\pnbang{}\Gamma,\Delta_1,\Delta_2 \lraS{a + b} C}{
- \deduce{\pnbang{}\Gamma,\Delta_1 \lraS{a}F}{}&
- \deduce{\pnbang{}\Gamma,\Delta_2, F \lraS{b}C}{}&
+$\nbang{a}$. Then, the following rule is admissible in $\laSELLR$
+$$
+\infer[cutL]{a + b:\nbang{}\Gamma,\Delta_1,\Delta_2\seq  C}
+{\deduce{a: \nbang{}\Gamma,\Delta_1 \seq F}{}&
+ \deduce{b: \nbang{}\Gamma,\Delta_2, F \seq C}{}&
 }
-\]
-Moreover, if $\Gamma \lraS{a} C$ is provable using cutL, then there is a cut-free proof of 
-$\Gamma \lraS{a'}C$ with $a \geq a'$.
+$$
+Moreover, if $a: \Gamma \seq C$ is provable using cutL, then there is a cut-free proof of 
+$a': \Gamma \seq C$ with $a \geq a'$.
 \end{theorem}
-\begin{proof}
-The cut-elimination procedure is rather standard. Let us present the case when the cut formula is $\vnbang{c}F$: 
-\[
-\infer[cutL]{\pnbang{}\Gamma,\Delta_1,\Delta_2\lraS{a+b+c} C}{
- \infer{\pnbang{}\Gamma,\Delta_1 \lraS{a} \vnbang{c}F}{(\pnbang{}\Gamma,\Delta_1)^\leqvn{c} \lraS{a} F}
- &
- \infer{\pnbang{}\Gamma,\Delta_2, \vnbang{c}F \lraS{b+c} C}{\pnbang{}\Gamma,\Delta_2, F \lraS{b} C}
-}
-\]
-reduces to
-\[
-\infer[cutL]{\pnbang{}\Gamma,\Delta_1, \Delta_2\lraS{a+b} C}{
- \deduce{(\pnbang{}\Gamma,\Delta_1)^\leqvn{c}  \lraS{a} F}{}
- &
- \deduce{\pnbang{}\Gamma,\Delta_2, F \lraS{b} C}{}
-}
-\]
-\end{proof}
-Still, forcing cut formulas to be linear seems to be a very severe restriction
-to impose. A better approach is given by keeping an exact track of the use of contraction in the cut-elimination process.  
-The idea is that, if proving $F$ costs $a$, then any use of $F$  
+The proof uses a standard cut-reduction strategy for $\SELL$, observing that it is compatible with the proposed labelling.
+
+Still, forcing cut formulas to be linear seems to be a very severe restriction to impose. We will now consider another, and less limiting, syntactic restriction on the cut formula. 
+
+\begin{definition} A formula of the form $\nbang{a} A $ is \emph{simply exp-labelled} if $a\neq 0$ and $A$ is bang-free.
+\end{definition}
+
+Since the formulas used in the proof of Theorem \ref{thm:impossible} can be simply exp-labelled, it is clear that we cannot expect to find an admissible cut rule for all simply exp-labelled cut formulas where the labelling depends solely on the labels of the premises. However, we can also incorporate the information from the label $a$ in the simply exp-labelled formula $\nbang{a} A$, as follows.
+
+%First, one preliminary lemma.
+%
+%\begin{lemma}\label{lem:remove}
+%If $\vdash_{\laSELLR} b:\Gamma,\nbang{a} A \seq C$ for some $b<a$, then $\vdash_{\laSELLR} b:\Gamma\seq C$.
+%\end{lemma}
+%\begin{proof}
+%Let $\pr$ be a $\laSELLR$-proof of $b\:\Gamma,\nbang{a} A \seq C$ where $b<a$. Then every label in $P$ must be smaller than $a$, and so $\nbang{a}$ can never be principal in an application of $(\nbang{a}_L)$. Furthermore, since neither $\nbang{a} A $ nor $\nbang{a} A$ are atomic, they cannot appear in an initial sequent. It follows that we can simply remove the denoted occurrence of $\nbang{a} A $, as well as all its ancestors and applications of $(\nbang{a}_L)$ or $(weak)$ stemming from them, from $\pr$.
+%\end{proof}
+
+\begin{theorem}[Exp-labelled-cut~\cite{Timo-PhD}]\label{theorem:cut}
+For any simply exp-labelled formula $\nbang{a} A $, the following cut rule is admissible in $\laSELLR$:
+$$
+\infer[cut_{el}]{f(b_1,b_2,a):\,!\Gamma,\Delta_1,\Delta_1\seq \Pi}{b_1:\,!\Gamma,\Delta_1\seq  \nbang{a} A  & b_2:\,!\Gamma,\Delta_2,\nbang{a} A \seq \Pi}
+$$
+where $f(b_1,b_2,a)=b_2+\lfloor b_2/a \rfloor\cdot b_1$.
+\end{theorem}
+The intuition behind this labelling is as follows: if the right subproof $R$ of the $cut_{el}$ ends with the label $b_2$, then the formula $\nbang{a} A$ can be unpacked at most $\lfloor b_2/a \rfloor$ times within a multiplicative subtree of $R$. Therefore, we can assume that the rule $\nbang{a}_L$ is applied only $\lfloor b_2/a \rfloor$ times on such a subtree.
+
+%The proof of this theorem can be found in~\cite{}.
+\subsection{Accumulated costs}
+Another approach is given by keeping an exact track of the use of contraction in the cut-elimination process.  
+The idea is that, if proving $A$ costs $b$, then any use of $A$  
 must pay this ``extra cost''. In order to keep track of this extra cost, we introduce the following notation.
 
 \begin{definition}
@@ -115,115 +162,116 @@ Let $\cE=\{a_b\mid a,b\in \cRpi\}$ be such that
 \item $a_b \geq_\cE a_c$ (i.e., the ordering $\geq_\cE$ ignores the subindices).
 \item $a_b >_\cE c_d$ iff $a>c$.
 \end{enumerate}
-For any formula $F\in\laSELLK$, we define $[F]_c$ as the formula that substitutes any 
-modality $\pnbang{a_b}{}$ with $\pnbang{a_{b+c}}$.
+For any formula $A\in\laSELLR$, we define $[A]_c$ as the formula that substitutes any 
+modality $\nbang{a_b}{}$ with $\nbang{a_{b+c}}$.
 \end{definition}
-Hence $\laSELLK$ can be slightly modified so that sequent labels belong to  $\cRpi$, while modal labels belong to $\cE$. Due to the ordering above, the promotion of $\pnbang{a_0}$ 
-has the same effect/constraints that the promotion of $\pnbang{a_b}$. However, the dereliction of the latter requires a greater budget ($a+b$ instead of $a$). Moreover, the equivalence $\pnbang{a_b}F \equiv \pnbang{a_c}F$ can be proven, each direction requiring a different budget.
+Hence $\laSELLRi$ can be slightly modified so that sequent labels belong to  $\cRpi$, while modal labels belong to $\cE$. Due to the ordering above, the promotion of $\nbang{a_0}$ 
+has the same effect/constraints that the promotion of $\nbang{a_b}$. However, the dereliction of the latter requires a greater budget ($a+b$ instead of $a$). Moreover, the equivalence $\nbang{a_b}A \equiv \nbang{a_c}A$ can be proven, each direction requiring a different budget.
 Finally, note that $\cE_0=\{a_0\mid a\in \cRpi\}\simeq \cRpi$, that is, each element $a\in\cRpi$ can be seen as the equivalence class of $a_0$ in $\cRpi\times \cRpi$ modulo $\cRpi$.
-We will abuse the notation and continue representing the resulting system by $\laSELLK$, also unchanging the representation of sequents. 
+We will abuse the notation and continue representing the resulting system by $\laSELLRi$, also unchanging the representation of sequents. 
 
 
 The following lemma has a straightforward proof.
 \begin{lemma}
-If $\Gamma, [F]_c \lraS{b}G$ then 
-$\Gamma, F \lraS{b'}G$
-with $b \geq b'$. More generally,  if $\Gamma, [F]_c \lraS{b}C$ and $c \geq c'$ then
-$\Gamma, [F]_{c'} \lraS{b'}C$ with $b \geq b'$. 
+If $b:\Gamma, [A]_c \seq C$ then 
+$b': \Gamma, A \seq C$
+with $b \geq b'$. More generally,  if $b:\Gamma, [A]_c \seq C$ and $c \geq c'$ then
+$b':\Gamma, [A]_{c'} \seq C$ with $b \geq b'$. 
 \end{lemma}
 The next definition restricts the appearance of unbounded modalities 
 only under linear implication.
-\begin{definition}[$\limp$-linear]
-We say that $F$ is  $\limp$-linear if for all subformulas of the form $A \limp B$ in $F$, $A$ does not have occurrences 
-of $\pnbang{a}$. 
+\begin{definition}
+We say that $A$ is  $\limp$-linear if for all subformulas of the form $B \limp C$ in $A$, $B$ is bang-free.
+%does not have occurrences of $\nbang{a}$. 
 \end{definition}
 The following result presents the admissibility of an extended form of the cut rule, where the budget information from the left premise is passed to the cut-formula in the right premise. Observe that the label
 of the conclusion is now a function of the labels of the premises. Moreover, the cut-reduction is {\em label preserving}, meaning that the budget monotonically decreases in the cut-elimination process.
 \begin{theorem}[$\limp$-linear cut]
 The following rule is admissible
-\[
-\infer[cut_{LL}\mbox{\quad $F$ is a $\limp$-linear formula}]{\pnbang{}\Gamma,\Delta_1,\Delta_2 \lraS{a + b} C}{
- \deduce{\pnbang{}\Gamma,\Delta_1 \lraS{a}F}{}&
- \deduce{\pnbang{}\Gamma,\Delta_2, [F]_a \lraS{b}C}{}&
+$$
+\infer[cut_{LL}\mbox{\quad $A$ is a $\limp$-linear formula}]{a+b: \nbang{}\Gamma,\Delta_1,\Delta_2 \seq C}{
+ \deduce{a:\nbang{}\Gamma,\Delta_1 \seq A}{}&
+ \deduce{b:\nbang{}\Gamma,\Delta_2, [A]_a \seq C}{}&
 }
-\]
-Moreover, if $\Gamma \lraS{a} C$ is provable using $cut_{LL}$, then there is a cut-free proof of 
-$\Gamma \lraS{a'}C$ with $a\geq a'$.
+$$
+Moreover, if $b: \Gamma \seq C$ is provable using $cut_{LL}$, then there is a cut-free proof of 
+$b': \Gamma \seq C$ with $b\geq b'$.
 
 \end{theorem}
 \begin{proof}
 We will illustrate some cases. 
 \begin{itemize}
- \item Note that: $[\pnbang{a_b}F]_c = \pnbang{a_{b+c}}[F]_c$;  the promotion of $\pnbang{a_b}F$, bottom-up, results in a context of 
- $\pnbang{}$ formulas (that can be contracted at will);
- and   the dereliction of $\pnbang{a_b}[F]_c$ decreases the budget in $a + b$. Hence, 
-  \[
- \infer{\pnbang{}\Gamma,\Delta_1,\Delta_2 \lraS{a + b + 2c+d}{C}}{
-   \infer{\pnbang{}\Gamma,\Delta_1 \lraS{c}\pnbang{a_b}F}{(\pnbang{}\Gamma)^\leqpn{a_b}\lraS{c}F}&
-   \infer{\pnbang{}\Gamma, \Delta_2, \pnbang{a_{b+c}}[F]_c \lraS{a+b+c+d}C}{\pnbang{}\Gamma, \Delta_2, [F]_{c}, \pnbang{a_{b+c}}[F]_c \lraS{d}C}
+ \item Note that: $[\nbang{a_b}A]_c = \nbang{a_{b+c}}[A]_c$;  the promotion of $\nbang{a_b}A$, bottom-up, results in a context of 
+ $\nbang{}$ formulas (that can be contracted at will);
+ and   the dereliction of $\nbang{a_b}[A]_c$ decreases the budget in $a + b$. Hence, 
+  $$
+ \infer{a + b + 2c+d: \nbang{}\Gamma,\Delta_1,\Delta_2 \seq C}{
+   \infer{c: \nbang{}\Gamma,\Delta_1 \seq \nbang{a_b}A}{c: (\nbang{}\Gamma)^\leqn{a_b}\seq A}&
+   \infer{a+b+c+d: \nbang{}\Gamma, \Delta_2, \nbang{a_{b+c}}[A]_c \seq C}{d: \nbang{}\Gamma, \Delta_2, [A]_{c}, \nbang{a_{b+c}}[A]_c \seq C}
  }
- \]
+ $$
 reduces to
-\[
-   \infer{\pnbang{}\Gamma,\Delta_1,\Delta_2 \lraS{2c+d}C}{
-    \deduce{(\pnbang{}\Gamma)^\leqpn{a_b} \lraS{c}F}{} &
-     \infer{\pnbang{}\Gamma,\Delta_2, [F]_{c}\lraS{c+d}C}{
-      \deduce{\pnbang{}\Gamma \lraS{c} \pnbang{a_b}F}{}&
-      \deduce{\pnbang{}\Gamma,\pnbang{a_{b+c}}[F]_c, \Delta_2, [F]_{c}\lraS{d}C}{}
+$$
+   \infer{2c+d: \nbang{}\Gamma,\Delta_1,\Delta_2 \seq C}{
+    \deduce{c: (\nbang{}\Gamma)^\leqn{a_b} \seq A}{} &
+     \infer{c+d: \nbang{}\Gamma,\Delta_2, [A]_{c}\seq C}{
+      \deduce{c:\nbang{}\Gamma \seq \nbang{a_b}A}{}&
+      \deduce{d:\nbang{}\Gamma,\nbang{a_{b+c}}[A]_c, \Delta_2, [A]_{c}\seq C}{}
      }
     }
- \]
+ $$
 where the  ``extra cost'' $a_b$ disappears after the reduction. 
- \item Note that $[F\otimes G]_c = [F]_{c} \otimes [G]_c$. Here, let $c = c_1 + c_2$: 
+ \item Note that $[A\otimes B]_c = [A]_{c} \otimes [B]_c$. Here, let $c = c_1 + c_2$: 
  \[
- \infer{\pnbang{}\Gamma,\Delta_1,\Delta_2 \lraS{b+c}C}{
-  \infer{\pnbang{}\Gamma,\Delta_1 \lraS{c} F \otimes G}{
-   \deduce{\pnbang{}\Gamma,\Delta_1' \lraS{c_1}F}{} &
-   \deduce{\pnbang{}\Gamma,\Delta_1'' \lraS{c_2}G}{} &
+ \infer{b+c: \nbang{}\Gamma,\Delta_1,\Delta_2 \seq C}{
+  \infer{c:\nbang{}\Gamma,\Delta_1 \seq A \otimes B}{
+   \deduce{c_1: \nbang{}\Gamma,\Delta_1' \seq A}{} &
+   \deduce{c_2:\nbang{}\Gamma,\Delta_1'' \seq B}{} &
   } &
-  \infer{\pnbang{}\Gamma,\Delta_2, [F \otimes G]_{c} \lraS{b}C}{\pnbang{}\Gamma,\Delta_2, [F]_c, [G]_c \lraS{b}C}
+  \infer{b: \nbang{}\Gamma,\Delta_2, [A \otimes B]_{c} \seq C}{b: \nbang{}\Gamma,\Delta_2, [A]_c, [B]_c \seq C}
  }
  \]
  reduces to
 \[
- \infer{\pnbang{}\Gamma,\Delta_1,\Delta_2 \lraS{b  +c}C}{
-  \deduce{\pnbang{}\Gamma,\Delta_1' \lraS{c_1} F}{} &
-  \infer{\pnbang{}\Gamma,\Delta_1 '',\Delta_2, [F]_{c_1} \lraS{b+c_2}C}{
-   \deduce{\pnbang{}\Gamma,\Delta_1'' \lraS{c_2} G}{} &
-   \deduce{\pnbang{}\Gamma,\Delta_2,[F]_{c_1}, [G]_{c_2} \lraS{b}C}{}
+ \infer{b+c: \nbang{}\Gamma,\Delta_1,\Delta_2 \seq C}{
+  \deduce{c_1: \nbang{}\Gamma,\Delta_1' \seq A}{} &
+  \infer{b+c_2: \nbang{}\Gamma,\Delta_1 '',\Delta_2, [A]_{c_1} \seq C}{
+   \deduce{c_2: \nbang{}\Gamma,\Delta_1'' \seq B}{} &
+   \deduce{b: \nbang{}\Gamma,\Delta_2,[A]_{c_1}, [B]_{c_2} \seq C}{}
   }
  }
  \]
- It is worth noticing that in the first derivation, the cost $c=c_1 + c_2$ is ``charged'' to  $F\otimes G$ 
-(in the formula $[F \otimes G]_c$)
-while in the second one, in a  finer way, the cost $c_1$ is charged to $F$ and $c_2$ to $G$. 
+ It is worth noticing that in the first derivation, the cost $c=c_1 + c_2$ is ``charged'' to  $A\otimes B$ 
+(in the formula $[A \otimes B]_c$)
+while in the second one, in a  finer way, the cost $c_1$ is charged to $A$ and $c_2$ to $B$. 
  \item The case of implication explains the restriction we impose. Here $b = b_1 + b_2$:
- \[
-\infer{\pnbang{}\Gamma,\Delta_1,\Delta_2 \lraS{c + b}C }{
-  \infer{\pnbang{}\Gamma,\Delta_1 \lraS{c} F\limp G}{
-   \deduce{\pnbang{}\Gamma,\Delta_1,F  \lraS{c} G}{}&
+ $$
+\infer{c+b: \nbang{}\Gamma,\Delta_1,\Delta_2 \seq C }{
+  \infer{c: \nbang{}\Gamma,\Delta_1 \seq A\limp B}{
+   \deduce{c: \nbang{}\Gamma,\Delta_1,A  \seq B}{}&
    }&
-   \infer{\pnbang{}\Gamma,\Delta_2, [F \limp G]_c \lraS{b }C }{
-     \deduce{\pnbang{}\Gamma,\Delta_2' \lraS{b_1}[F]_{c}}{}&
-     \deduce{\pnbang{}\Gamma,\Delta_2'', [G]_c\lraS{b_2} C}{}
+   \infer{b: \nbang{}\Gamma,\Delta_2, [A \limp B]_c \seq C }{
+     \deduce{b_1: \nbang{}\Gamma,\Delta_2' \seq [A]_{c}}{}&
+     \deduce{b_2: \nbang{}\Gamma,\Delta_2'', [B]_c\seq C}{}
    }
 }
- \]
+ $$
  reduces to 
  \[
- \infer{\pnbang{}\Gamma,\Delta_1,\Delta_2 \lraS{c + b} C}{
-   \deduce{\pnbang{}\Gamma,\Delta_2' \lraS{b_1} F}{}&
-   \infer{\pnbang{}\Gamma,\Delta_1,\Delta_2'', [F]_{b_1} \lraS{c + b_2}C}{
-    \deduce{\pnbang{}\Gamma,\Delta_1, [F]_{b_1} \lraS{c} G}{} &
-    \deduce{\pnbang{}\Gamma,\Delta_2'', [G]_{c} \lraS{b_2} C}{}
+ \infer{c+b: \nbang{}\Gamma,\Delta_1,\Delta_2 \seq C}{
+   \deduce{b_1: \nbang{}\Gamma,\Delta_2' \seq A}{}&
+   \infer{c+b_2: \nbang{}\Gamma,\Delta_1,\Delta_2'', [A]_{b_1} \seq C}{
+    \deduce{c: \nbang{}\Gamma,\Delta_1, [A]_{b_1} \seq B}{} &
+    \deduce{b_2: \nbang{}\Gamma,\Delta_2'', [B]_{c} \seq C}{}
    }
  }
  \]
-Note that the reduction above is correct since $F$ does not have 
-occurrences of $\pnbang{a}$ and then  $[F]_c = [F]_{b_1}=F$. 
+Note that the reduction above is correct since $A$ does not have 
+occurrences of $\nbang{a}$ and then  $[A]_c = [A]_{b_1}=A$. 
 \end{itemize}
 \end{proof}
-This kind of analysis seems to be related with {\em flowgraphs} in \MELL~\cite{DBLP:journals/tcs/Strassburger03,DBLP:journals/tocl/StrassburgerG11}. 
+%This kind of analysis seems to be related with {\em flowgraphs} in \MELL~\cite{DBLP:journals/tcs/Strassburger03,DBLP:journals/tocl/StrassburgerG11}. 
 %
- \label{sec:app}
+
+Regardless of the chosen approach to enable cut-admissibility, the need for compositionality in dialogue games driven by a cut rule is a topic worth exploring~\cite{dutilh18}.
 

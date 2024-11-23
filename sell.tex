@@ -1,35 +1,30 @@
 %!TEX root = CSL.tex
 
 Our starting point is a calculus for \emph{affine intuitionistic linear logic} ($\aILL$)~\cite{DBLP:journals/tcs/Girard87}. Formulas in $\aILL$ are built from the grammar 
-\[
+$$
  A ::= p \mid \zero \mid \one  
  \mid A_1 \with A_2  \mid A_1 
  \oplus A_2 \mid   A_1 \tensor A_2
   \mid A_1 \lolli A_2\mid \bang A.
-\]
+$$
 with a denumerable infinite set of propositional variables $\{p, q, r, \ldots\}$, the units $\{\zero,\one\}$,  the binary connectives for additive conjunction and disjunction $\{\with,\oplus\}$, the multiplicative conjunction $\tensor$, the  linear implication $\lolli$, and the exponential $\bang$.
 
-Similar to modal connectives, the exponential $\bang$ in intuitionistic linear logic  is not {\em canonical}~\cite{DBLP:conf/kgc/DanosJS93}, in the sense that, even having the same scheme for introduction rules, marking the exponentials with different labels  does not preserve equivalence. That is, if  $i\not= j$ then
+Similar to modal connectives, the exponential $\bang$ in intuitionistic linear logic  is not {\em canonical}, in the sense that, even having the same scheme for introduction rules, marking the exponentials with different labels  does not preserve equivalence. That is, if  $i\not= j$ then
 $\nbang{i}A\not\equiv\nbang{j}A$.
 %
-Intuitively, this means that we can mark the exponential with {\em labels} taken from a set $\mathcal{I}$ organized in a pre-order $\preceq$ (\ie, a reflexive and transitive relation), obtaining (possibly infinitely-many) exponentials ($\nbang{i}$
-%,\nquest{i}$ 
-for $i\in\mathcal{I}$).
-Also as in multi-modal systems, the pre-order  determines the provability relation: 
+Intuitively, this means that we can mark the exponential with {\em labels} taken from a set $\mathcal{I}$ organized in a pre-order $\preceq$ (\ie, a reflexive and transitive relation), obtaining (possibly infinitely-many) exponentials $\nbang{i}$
+for $i\in\mathcal{I}$. These are called {\em subexponentials}~\cite{DBLP:conf/kgc/DanosJS93}, and the respective proof system for linear logic with subexponentials is called $\SELL$~\cite{DBLP:journals/jar/NigamM10}.
+As in multi-modal systems, the pre-order  determines the provability relation: 
 for a general formula $A$, $\nbang{b}A$ {\em implies} $\nbang{a}A$ iff $a \preceq b$.
 %
 Pre-ordering the labels (together with an upward closeness requirement)
-guarantees cut-elimination~\cite{DBLP:journals/jar/NigamM10}. 
+guarantees cut-elimination in $\SELL$~\cite{DBLP:conf/kgc/DanosJS93}. 
 
 The algebraic structure of subexponentials, combined with their intrinsic structural property allow for the proposal of rich linear logic based frameworks. This opened a venue for proposing different multi-modal substructural logical systems, that encountered a number of different applications (see~\cite{DBLP:conf/fscd/PimentelON21} for a survey). 
 
-In this paper, we will use subexponentials to model the notion of {\em costs}. We will start by considering the particular case where labels will be elements of $\real^+$, the set of non-negative real numbers. Formally, we substitute in $\aILL$
-%our language 
+In this paper, we will use subexponentials to model the notion of {\em costs}. We will start by considering the particular case where labels will be elements of $\real^+$, the set of non-negative real numbers, with the usual pre-order $\leq$. Formally, we substitute in $\aILL$
 the exponential $\bang$ by the unary modal operators $\nbang{a}$ 
 for each $a\in\real^+$. 
-%and call the resulting formulas \emph{extended formulas}. 
-
-%An extended formula $\nbang{a}A$ will be seen as a \emph{permanent resource}: We can obtain as many copies of~$A$ from it as we want, each time paying the price~$a$.
 
 We shall use $A,B,C$ (resp. $\Gamma,\Delta$) to range over formulas (resp. multisets of formulas).  
 Sequents have the form $\Gamma\seq C$ where subformulas $\nbang{a}A$ will have a restriction to occur only {\em negatively} in the sequent.\footnote{The notion of polarity  is the standard one: A subformula occurrence in the antecedent of a sequent is {\em negative} if it occurs in the scope of an even number (including $0$) of contexts $([\cdot]\limp B)$, and otherwise it is {\em positive}. For occurrences of a subformula in the consequent, one replaces ``even'' by ``odd''. The reason for this restriction will be made clear in Section~\ref{sec:cut}.}
@@ -80,58 +75,51 @@ $}\caption{Sequent system $\aIMALLR$}
 \subsection{Playing with subexponentials}
 We shall  characterize $\aIMALLR$ proofs as winning strategies (w.s.) in a two-player game, the players denoted $\I$ and~$\II$. As usual, 
 we will interpret bottom-up proof search in sequent systems as a game where,  at any given state, player \I first 
-chooses a formula of a sequent and, in the next step,  either
+chooses a formula of a sequent and, in the next step: 
 \begin{itemize}
 \item if the rule has
 only one premise: \I moves to the premise sequent of the corresponding introduction rule; 
-\item if the rule has two premises: 
+\item if the rule has two premises either
 \begin{enumerate}[i.]
 \item player \II
 chooses 
-a premise sequent in which the game continues;
-\item  the game splits into independent subgames, where \I has to win all of them if she want to win the game.
+a premise sequent in which the game continues; or
+\item  the game splits into independent subgames, where \I has to win all of them if she wants to win the game.
 \end{enumerate}
 \end{itemize}
-
 The choice between $(i)$ and $(ii)$ depends on the nature of the rule:
-branching
-in {\em additive rules} is modeled as choices of \II, whereas in\co{Check this in... branching in??} branching {\em multiplicative rules},  \I   splits the context into two disjoint parts,
-which then form the corresponding contexts of two  subgames to
-be played in parallel. Consequently, a state of the game is represented
-by a \textit{multiset of sequents}, each belonging to a separate subgame. 
+branching in {\em additive rules} is modeled as choices made by \II, while branching in {\em multiplicative rules} involves \I splitting the context into two disjoint parts, which then serve as the corresponding contexts for two subgames played in parallel. Consequently, the state of the game is represented by a \textit{multiset of sequents}, with each sequent belonging to a distinct subgame.
 
-Now, in order to capture the notion of {\em costs},  game states  will also involve a {\bf budget} (modeled as a real number) which will decrease whenever rule $\nbang{}_L$ is invoked\co{Invoked -> applied. Also, you can add ``This means that there is a `cost' $r$ in dereliction, i.e., when unpacking a formula `stored' in the modalitiy $\nbang{r}{}$}
-
+Now, to capture the notion of {\em costs}, game states include a {\em budget} (modeled as a real number) that decreases whenever the rule $\nbang{}_L$ is applied. This implies a cost $a$ is incurred during dereliction, \ie, when unpacking a formula stored within the modality $\nbang{a}{}$.
+%
 Formally we have the following.
 \begin{definition}[The game $\GAIMALLR$]\label{definition:GAIMALLR}
-    $\GAIMALLR$ is a game of two players, \I and \II. Game states are tuples $(H,b)$, where $H$ is a finite multiset of extended sequents\co{Not defined yet} and $b\in\real$ is a ``budget''.
-$\GAIMALLR$ proceeds in rounds, initiated by \I's selection of an extended sequent $S$ from the current game state. The successor state is determined according to rules that fit one of the two following schemes:
-
-\[
+    $\GAIMALLR$ is a game of two players, \I and \II. Game states are tuples $(H,b)$, where $H$ is a finite multiset of sequents and $b\in\real$ is a ``budget''.
+$\GAIMALLR$ proceeds in rounds, initiated by \I's selection of a sequent $S$ from the current game state. The successor state is determined according to rules that fit one of the two following schemes:
+$$
 \begin{array}{lllll}
 {(1)} &(G\cup\{S\},b)&\quad\leadsto\quad&  \quad (G\cup\{S'\},b') & \\
 {(2)} &(G\cup\{S\},b)&\quad\leadsto\quad&  \quad (G\cup\{S^1\}\cup\{S^2\},b)
 \end{array}
-\]
-
-A round proceeds as follows: After \I has chosen an extended sequent $S\in H$ among the current game state, she chooses a rule  instance  $r$ of $\aIMALLR$ such that $S$ is the conclusion of that rule. Depending on  $r$, the round proceeds as follows:
+$$
+A round proceeds as follows: After \I has chosen a sequent $S\in H$ among the current game state, she chooses a rule  instance  $r$ of $\aIMALLR$ such that $S$ is the conclusion of that rule. Depending on  $r$, the round proceeds as follows:
 \begin{enumerate}
 \item If $r$ is a unary rule different from $\nbang{}_L$ with premise $S'$, then the game proceeds in the game state $(G\cup\{S'\},b)$.
-\item {\bf Budget decrease:} If $r=\nbang{}_L$ with premise $S'$ and principal formula $\nbang{a}A$, then the game proceeds in the game state $(G\cup\{S'\},b-a)$.
-\item {\bf Parallelism:} If $r$ is a binary rule with premises $S_1,S_2$ pertaining to a \emph{multiplicative} connective, then the game proceeds as $(G\cup\{S_1\}\cup\{S_2\},b)$.
-\item {\bf \II-choice:} If $r$ is a binary rule with premises $S_1,S_2$ pertaining to an \emph{additive} connective, then \II chooses $S'\in\{S_1,S_2\}$ and the game proceeds in the game state $(G\cup\{S'\},b)$.
+\item {\em Budget decrease:} If $r=\nbang{}_L$ with premise $S'$ and principal formula $\nbang{a}A$, then the game proceeds in the game state $(G\cup\{S'\},b-a)$.
+\item {\em Parallelism:} If $r$ is a binary rule with premises $S_1,S_2$ pertaining to a \emph{multiplicative} connective, then the game proceeds as $(G\cup\{S_1\}\cup\{S_2\},b)$.
+\item {\em \II-choice:} If $r$ is a binary rule with premises $S_1,S_2$ pertaining to an \emph{additive} connective, then \II chooses $S'\in\{S_1,S_2\}$ and the game proceeds in the game state $(G\cup\{S'\},b)$.
 \end{enumerate}
 
-\noindent A {\bf winning state} (for \I) is a game state $(H,b)$ such that all $S\in H$ are initial sequents of $\aIMALLR$ and $b\geq 0$.
+\noindent A {\em winning state} (for \I) is a game state $(H,b)$ such that all $S\in H$ are initial sequents of $\aIMALLR$ and $b\geq 0$.
 \end{definition}
 
 \begin{definition}[Plays and strategies]
-A {\bf play} of $\GAIMALLR$ on a game state $(H,b)$ is a sequence $(H_1,b_1),(H_2,b_2),\ldots,(H_n,b_n)$ of game states, where $(H_1,b_1)=(H,b)$ and each $(H_{i+1},b_{i+1})$ arises by playing one round on $(H_i,b_i)$.
- A {\bf strategy} (for \I) on a game state $(H,b)$ is defined as a function telling \I how to move in any given state. 
- A strategy on $(H,b)$ is a {\bf winning strategy (w.s.)} if all plays following it eventually reach a winning state.
+A {\em play} of $\GAIMALLR$ on a game state $(H,b)$ is a sequence $(H_1,b_1),(H_2,b_2),\ldots,(H_n,b_n)$ of game states, where $(H_1,b_1)=(H,b)$ and each $(H_{i+1},b_{i+1})$ arises by playing one round on $(H_i,b_i)$.
+ A {\em strategy} (for \I) on a game state $(H,b)$ is defined as a function telling \I how to move in any given state. 
+ A strategy on $(H,b)$ is a {\em winning strategy (w.s.)} if all plays following it eventually reach a winning state.
 We write $\wins{}{\GAIMALLR}(H,b)$ if \I has a w.s. in the $\GAIMALLR$-game starting on $(H,b)$. 
 \end{definition}
-The intuitive reading of $\wins{}{\GAIMALLR}(H,b)$ is: \textit{The budget~$b$ suffices to win the game $H$.}
+The intuitive reading of $\wins{}{\GAIMALLR}(H,b)$ is: The budget~$b$ suffices to win the game $H$.
 
 \begin{example}\label{ex:riddle}
 Consider the following well-known riddle:
@@ -142,7 +130,7 @@ We can model the matching pair by the disjunction $(w\tensor w)\oplus(b\tensor b
 \begin{quote}
 What is the least budget $n$  such that $\wins{}{\GAIMALLR}(\nbang{1}(w\oplus b)\seq (w\tensor w)\oplus(b\tensor b),n)$?
 \end{quote}
-The following play illustrate that $n=3$ suffices, where $F=(w\tensor w)\oplus(b\tensor b)$ and $G=\nbang{1}(w\oplus b)$: \\
+The following play illustrate that $n=3$ suffices, where $F=(w\tensor w)\oplus(b\tensor b)$ and $G=\nbang{1}(w\oplus b)$:
 \begin{enumerate}
 \item $(\{G\seq F\},3)$ 
 \item $(\{G, w\oplus b, w\oplus b, w\oplus b\seq F\},0)$ ($3\times$ budget decrease)
@@ -152,9 +140,9 @@ The following play illustrate that $n=3$ suffices, where $F=(w\tensor w)\oplus(b
 \item $(\{G, w, b, b\seq b\otimes b\},0)$ 
 \item $(\{G, w, b\seq b\}\cup \{G, b\seq b\},0)$ (parallelism)
 \end{enumerate}
-Observe that the other possible choices for $\II$ are similar or simpler. 
+The other possible choices for $\II$ are similar or simpler, and that $n=2$ is not enough for winning the game.
 \end{example}
-We note that it is not necessary to consider all possible strategies in $\GAIMALLR$: For example, \I never needs to take the budget into account when deciding the next move. It is easy to see that a~$\aIMALLR$-proof $\pr$ of a sequent $S$ translates to a w.s. in $(S,b)$ for some \textit{sufficiently large} budget $b$. Taking these observations together, one can prove the following.
+We note that it is not necessary to consider all possible strategies in $\GAIMALLR$: For example, \I never needs to take the budget into account when deciding the next move. Also, it is easy to see that a~$\aIMALLR$-proof $\pr$ of a sequent $S$ translates to a w.s. in $(\{S\},b)$ for some \textit{sufficiently large} budget $b$. Taking these observations together, one can prove the following.
 \begin{theorem}[Weak adequacy for $\GAIMALLR$~\cite{DBLP:conf/tableaux/LangOPF19}]
 \label{theorem:wadeq}
 Let $S$ be a sequent. Then
@@ -191,7 +179,7 @@ To overcome this discrepancy, we introduce a  labelled extension of $\aIMALLR$ t
 \quad 
 \infer[\oplus_{R_i}]{b:\Gamma \seq A_1 \oplus A_2}{b:\Gamma \seq A_i}
 \\\\
-\infer[\nbang{}_L]{c+a:\Gamma,\nbang{a}A\seq C}{c:\Gamma,\nbang{a}A,A\seq C}
+\infer[\nbang{a}_L]{c+a:\Gamma,\nbang{a}A\seq C}{c:\Gamma,\nbang{a}A,A\seq C}
 \\\\
   \infer[I]{0:\Gamma,p \seq p}{} 
  \qquad
@@ -210,40 +198,41 @@ Now we can  prove the desired correspondence.
 $\wins{}{\GAIMALLR}(\{\Gamma\seq A\},b)\quad\iff\quad\vdash_{\laIMALLR}b: \Gamma\seq A$. 
 \end{theorem}
 This result can be further strengthened: in fact, proofs (and games) can be assigned a minimal budget, referred to as {\em the cost}: given a proof $\pr$ of a sequent, one can assign the label $0$ to all initial sequents of $\pr$ and propagate the labels downward according to the rules of $\laIMALLR$.
-
+%
 However, the broader implications are even more interesting, as illustrated in the following example.
 \begin{example}
 Suppose that a printer costs \$500 and it produces copies for \$0.1. Which is the budget needed for making 2 copies?
 
 Since buying a printer and making a copy can be modeled as  $\nbang{500}(\nbang{0.1}C)$, the goal is to find possible budgets for 
-\[
+$$
 b:\;  \nbang{500}(\nbang{0.1}C)\seq C\otimes C
-\]
+$$
 Now, there are many ways of proving this sequent in $\laIMALLR$. For example, the proof below has a cost \$500.20:
-\[
+$$
 \infer[\nbang{500}]{500.20:\;  \nbang{500}(\nbang{0.1}C)\seq C\otimes C}
 {\infer=[\nbang{0.10} \times 2]{0.20:\;  \nbang{0.1}C\seq C\otimes C}
 {\infer=[\otimes,I]{0:\;  C,C\seq C\otimes C}{}}} 
-\]
+$$
 This proof corresponds to purchasing one printer and producing two copies from it.
 
 Alternatively, one could overprice the scenario by purchasing two printers and making one copy with each, incurring a cost of \$1,000.20.
-\[
+$$
 \infer=[\nbang{500}  \times 2]{1,000.20:\;  \nbang{500}(\nbang{0.1}C)\seq C\otimes C}
 {\infer=[\nbang{0.10}]{0.20:\;  \nbang{0.1}C,\nbang{0.1}C\seq C\otimes C}
 {\infer=[\otimes,I]{0:\;  C,C\seq C\otimes C}{}}} 
-\]
+$$
 \end{example}
-Hence, different proofs of the same sequent can lead to different costs. Nevertheless, it is straightforward to show that cost-optimal strategies exist for all provable sequents. We note, however, that the proof of this result is non-constructive.
+Hence, different proofs of the same sequent can lead to different costs. Nevertheless, cost-optimal strategies exist for all provable sequents, as the following result shows.\footnote{We note that the proof of this result is non-constructive!}
 
 \begin{theorem}[Cost-optimal proofs~\cite{DBLP:conf/tableaux/LangOPF19}]\label{cor:spectrum}
 If $\vdash_{\aIMALLR}\Gamma\seq A$, then there exists a smallest $b$ such that $\vdash_{\laIMALLR}b: \Gamma\seq A$.
 \end{theorem}
+This  demonstrates that our games and systems provide a more precise control over the resources appearing {\em negatively} in sequents, unlocking new opportunities for analyzing the problem of {\em comparing proofs}. 
 
-This result demonstrates that our games and systems provide a more precise control over the resources appearing {\em negatively} in sequents, unlocking new opportunities for analyzing the problem of {\em comparing proofs}. For instance, we anticipate that studying the costs of proofs in labelled calculi could reveal connections between labels and computational bounds~\cite{DBLP:journals/jfp/AccattoliGK20}.
-
+For instance, we anticipate that studying the costs of proofs in labelled calculi could reveal connections between labels and computational bounds~\cite{DBLP:journals/jfp/AccattoliGK20}.
+%
 Moreover, it would be interesting to explore the relationship between budgets and the complexity of the cut-elimination process, particularly within the multiplicative-(sub)exponential fragment~\cite{DBLP:journals/tcs/Strassburger03,DBLP:journals/tocl/StrassburgerG11}.
-
+%
 Finally, we aim to investigate how the dialogue games we have developed relate to the so-called {\em concurrent games}~\cite{DBLP:conf/lics/AbramskyM99, DBLP:conf/lics/FaggianM05,DBLP:journals/lmcs/CastellanCRW17}. 
 
 
