@@ -7,11 +7,11 @@ Our starting point is a calculus for \emph{affine intuitionistic linear logic} (
  \oplus A_2 \mid   A_1 \tensor A_2
   \mid A_1 \lolli A_2\mid \bang A.
 \]
-with a denumerable infinite set of propositional variables $\{p, q, r, \ldots\}$, the unities\co{units?} $\{\zero,\one\}$,  the binary connectives for additive conjunction and disjunction $\{\with,\oplus\}$, the multiplicative conjunction $\tensor$, the  linear implication $\lolli$ \co{I'd add ``,'' and...}and the exponential $\bang$.
+with a denumerable infinite set of propositional variables $\{p, q, r, \ldots\}$, the units $\{\zero,\one\}$,  the binary connectives for additive conjunction and disjunction $\{\with,\oplus\}$, the multiplicative conjunction $\tensor$, the  linear implication $\lolli$, and the exponential $\bang$.
 
 Similar to modal connectives, the exponential $\bang$ in intuitionistic linear logic  is not {\em canonical}~\cite{DBLP:conf/kgc/DanosJS93}, in the sense that, even having the same scheme for introduction rules, marking the exponentials with different labels  does not preserve equivalence. That is, if  $i\not= j$ then
-$\nbang{i}A\not\equiv\nbang{j}A$.\co{Link break doesn't seem to be needed here?}
-
+$\nbang{i}A\not\equiv\nbang{j}A$.
+%
 Intuitively, this means that we can mark the exponential with {\em labels} taken from a set $\mathcal{I}$ organized in a pre-order $\preceq$ (\ie, a reflexive and transitive relation), obtaining (possibly infinitely-many) exponentials ($\nbang{i}$
 %,\nquest{i}$ 
 for $i\in\mathcal{I}$).
@@ -37,7 +37,7 @@ Sequents have the form $\Gamma\seq C$ where subformulas $\nbang{a}A$ will have a
 We denote by $\nbang{}\Gamma$ a set of formulas  prefixed with $\nbang{a}$ for some (not necessarily the same) $a\in\real^+$. 
 
 The rules for the system $\aIMALLR$ are depicted in Fig.~\ref{fig:ll}. Note that the cut rule is not included in our presentation of $\aIMALL$ and that weakening is present only implicitly, via the context $\Gamma$ in the initial sequents. Furthermore, in rule $I$, $p$ is a propositional variable and there is no right rule for $\nbang{}$ in $\aIMALLR$ since they only appear in negative polarity.
-We shall write $\vdash_{\aIMALLR} S$ if the sequent $S$ is provable in $\aIMALLR$.\co{There is a problem with the rule for zero}
+We shall write $\vdash_{\aIMALLR} S$ if the sequent $S$ is provable in $\aIMALLR$.
 
 \begin{figure}[t]
 \resizebox{\textwidth}{!}{
@@ -70,7 +70,7 @@ $
  \qquad
 \infer[\one_R]{\Gamma \seq \one}{}
 \qquad 
-\infer[\zero_L]{ \Gamma,\zero\nbang A}{}
+\infer[\zero_L]{ \Gamma,\zero\seq C}{}
 \end{array}
 $}\caption{Sequent system $\aIMALLR$}
 \label{fig:ll}
@@ -88,9 +88,8 @@ only one premise: \I moves to the premise sequent of the corresponding introduct
 \begin{enumerate}[i.]
 \item player \II
 chooses 
-a premise sequent in which the game continues (if the rule has more than one premise).\co{This sentence in parenthesis is not needed}
-\item  the game splits into independent subgames, all of
-    which player \I has to win. \co{subgames, where \I has to win all of them if she want to win the game}
+a premise sequent in which the game continues;
+\item  the game splits into independent subgames, where \I has to win all of them if she want to win the game.
 \end{enumerate}
 \end{itemize}
 
@@ -163,6 +162,7 @@ Let $S$ be a sequent. Then
 $\exists b\left(\wins{}{\GAIMALLR}(\{S\},b)\right)\quad\iff\quad\vdash_{\aIMALLR} S$
 \end{theorem}
 This is a \emph{weak} adequacy since information about the budget $b$ is lost in the proof theoretic representation. In other words, the game $\GAIMALLR$ is more expressive than the calculus $\aIMALLR$.
+
 To overcome this discrepancy, we introduce a  labelled extension of $\aIMALLR$ that we call $\laIMALLR$. A $\laIMALLR$-proof is build from labelled sequents $b: \Gamma\seq A$ where $\Gamma\seq A$ is a sequent and $b\in\real^+$. The complete system is given in Fig. \ref{fig:lll}. 
 \begin{figure}[t]
 {
@@ -205,19 +205,46 @@ To overcome this discrepancy, we introduce a  labelled extension of $\aIMALLR$ t
 \label{fig:lll}
 \end{figure}
 Now we can  prove the desired correspondence.
-\begin{theorem}[strong adequacy for $\GAIMALLR$~\cite{DBLP:conf/tableaux/LangOPF19}]
+\begin{theorem}[Strong adequacy for $\GAIMALLR$~\cite{DBLP:conf/tableaux/LangOPF19}]
 \label{theorem:adeq2}
 $\wins{}{\GAIMALLR}(\{\Gamma\seq A\},b)\quad\iff\quad\vdash_{\laIMALLR}b: \Gamma\seq A$. 
 \end{theorem}
-This result can be made even stronger: in fact, proofs (and games) can be given a minimal budget:
-given a proof $\pr$ of a sequent, just assign the label $0$ to all initial sequents 
-of $\pr$ and propagate the labels downwards according to the rules of $\laIMALLR$. This minimal budget will be called {\em the cost} os $\pr$, denoted by $\costs{\pr}$.
+This result can be further strengthened: in fact, proofs (and games) can be assigned a minimal budget, referred to as {\em the cost}: given a proof $\pr$ of a sequent, one can assign the label $0$ to all initial sequents of $\pr$ and propagate the labels downward according to the rules of $\laIMALLR$.
 
-But the big picture is even more interesting: cost-optimal strategies for all provable sequents exist
-\begin{theorem}\label{cor:spectrum}[\cite{DBLP:conf/tableaux/LangOPF19}]
-There is a smallest $b$ such that $\vdash_{\laIMALLR}\Gamma\lra_b A$.
+However, the broader implications are even more interesting, as illustrated in the following example.
+\begin{example}
+Suppose that a printer costs \$500 and it produces copies for \$0.1. Which is the budget needed for making 2 copies?
+
+Since buying a printer and making a copy can be modeled as  $\nbang{500}(\nbang{0.1}C)$, the goal is to find possible budgets for 
+\[
+b:\;  \nbang{500}(\nbang{0.1}C)\seq C\otimes C
+\]
+Now, there are many ways of proving this sequent in $\laIMALLR$. For example, the proof below has a cost \$500.20:
+\[
+\infer[\nbang{500}]{500.20:\;  \nbang{500}(\nbang{0.1}C)\seq C\otimes C}
+{\infer=[\nbang{0.10} \times 2]{0.20:\;  \nbang{0.1}C\seq C\otimes C}
+{\infer=[\otimes,I]{0:\;  C,C\seq C\otimes C}{}}} 
+\]
+This proof corresponds to purchasing one printer and producing two copies from it.
+
+Alternatively, one could overprice the scenario by purchasing two printers and making one copy with each, incurring a cost of \$1,000.20.
+\[
+\infer=[\nbang{500}  \times 2]{1,000.20:\;  \nbang{500}(\nbang{0.1}C)\seq C\otimes C}
+{\infer=[\nbang{0.10}]{0.20:\;  \nbang{0.1}C,\nbang{0.1}C\seq C\otimes C}
+{\infer=[\otimes,I]{0:\;  C,C\seq C\otimes C}{}}} 
+\]
+\end{example}
+Hence, different proofs of the same sequent can lead to different costs. Nevertheless, it is straightforward to show that cost-optimal strategies exist for all provable sequents. We note, however, that the proof of this result is non-constructive.
+
+\begin{theorem}[Cost-optimal proofs~\cite{DBLP:conf/tableaux/LangOPF19}]\label{cor:spectrum}
+If $\vdash_{\aIMALLR}\Gamma\seq A$, then there exists a smallest $b$ such that $\vdash_{\laIMALLR}b: \Gamma\seq A$.
 \end{theorem}
-We note that the proof of this result is not constructive.
+
+This result demonstrates that our games and systems provide a more precise control over the resources appearing {\em negatively} in sequents, unlocking new opportunities for analyzing the problem of {\em comparing proofs}. For instance, we anticipate that studying the costs of proofs in labelled calculi could reveal connections between labels and computational bounds~\cite{DBLP:journals/jfp/AccattoliGK20}.
+
+Moreover, it would be interesting to explore the relationship between budgets and the complexity of the cut-elimination process, particularly within the multiplicative-(sub)exponential fragment~\cite{DBLP:journals/tcs/Strassburger03,DBLP:journals/tocl/StrassburgerG11}.
+
+Finally, we aim to investigate how the dialogue games we have developed relate to the so-called {\em concurrent games}~\cite{DBLP:conf/lics/AbramskyM99, DBLP:conf/lics/FaggianM05,DBLP:journals/lmcs/CastellanCRW17}. 
 
 
 
