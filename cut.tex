@@ -46,9 +46,9 @@ $$
 	 	}
 	}
 $$
-where the upper cut has a smaller rank, and the lower cut has a smaller degree than the original cut. However, this approach fails in the labelled setting because, in $a < b_1$, the label increases.
+where the upper cut has a smaller rank, and the lower cut has a smaller degree than the original cut. However, this approach fails in the labelled setting because, whenever $a < b_1$, the label increases.
 
-Although alternative reduction methods could be explored, the following result shows that it is impossible to define a labelled cut rule for \laSELLR\ where the label of the conclusion depends solely on the labels of the premises. We include the remarkable proof by Timo Lang, as it is highly insightful.
+Although alternative reduction methods could be explored, the following result shows that it is impossible to define a labelled cut rule for \laSELLR\ where the label of the conclusion depends solely on the labels of the premises. We include the remarkable proof by Timo Lang\co{He is an author... better not to add this?}, as it is highly insightful.
 \begin{theorem}[Impossible-cut~\cite{DBLP:conf/tableaux/LangOPF19}]\label{thm:impossible} There is no function $f:\real^+\times \real^+\rightarrow\real^+$ such that the rule
 $$
 \infer[cut]{f(a,b)\nbang{}\Gamma,\Delta_1,\Delta_2\seq C}
@@ -76,7 +76,7 @@ The theorem above indicates that, to find an admissible labelled cut rule, we mu
 \begin{enumerate}
 \item restrict the form of the cut formula;
 \item allow the labelling function $f$ to incorporate more information from the premises than just their labels;
-\item change the concept of cut.
+\item change the concept of cut. \co{this could be problematic} 
 \end{enumerate}
 
 
@@ -109,7 +109,7 @@ Observe that this still does not define a computable function relating the label
 \subsection{Linearity}
 %It is worth noticing that the sole responsible for the impossibility result of Thm.~\ref{thm:impossible} is the explosive combination of the use of tensor/implication and contraction, that is, the multiplicative-sub-exponential fragment. Hence, limiting the occurrence of one or the other leads to more amenable results.
 
-We will now show cases of restricting the form of the cut formula, starting with the case where the cut formula is $!$-free. 
+Now we show cases where the cut formula is restricted, starting with the case where the cut formula is $!$-free. 
 \begin{theorem}[Linear-cut]
 Let $A$ be a formula with no occurrences of 
 $\nbang{a}$. Then, the following rule is admissible in $\laSELLR$
@@ -122,7 +122,7 @@ $$
 Moreover, if $a: \Gamma \seq C$ is provable using cutL, then there is a cut-free proof of 
 $a': \Gamma \seq C$ with $a \geq a'$.
 \end{theorem}
-The proof uses a standard cut-reduction strategy for $\SELL$, observing that it is compatible with the proposed labelling.
+The proof uses a standard cut-reduction strategy for $\SELL$, observing in each case that the reduction of the label is possible. 
 
 Still, forcing cut formulas to be linear seems to be a very severe restriction to impose. We will now consider another, and less limiting, syntactic restriction on the cut formula. 
 
