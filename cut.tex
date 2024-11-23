@@ -111,12 +111,12 @@ Observe that this still does not define a computable function relating the label
 
 We will now show cases of restricting the form of the cut formula, starting with the case where the cut formula is $!$-free. 
 \begin{theorem}[Linear-cut]
-Let $F$ be a formula with no occurrences of 
+Let $A$ be a formula with no occurrences of 
 $\nbang{a}$. Then, the following rule is admissible in $\laSELLR$
 $$
 \infer[cutL]{a + b:\nbang{}\Gamma,\Delta_1,\Delta_2\seq  C}
-{\deduce{a: \nbang{}\Gamma,\Delta_1 \seq F}{}&
- \deduce{b: \nbang{}\Gamma,\Delta_2, F \seq C}{}&
+{\deduce{a: \nbang{}\Gamma,\Delta_1 \seq A}{}&
+ \deduce{b: \nbang{}\Gamma,\Delta_2, A \seq C}{}&
 }
 $$
 Moreover, if $a: \Gamma \seq C$ is provable using cutL, then there is a cut-free proof of 
