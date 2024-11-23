@@ -151,7 +151,7 @@ The intuition behind this labelling is as follows: if the right subproof $R$ of 
 
 %The proof of this theorem can be found in~\cite{}.
 \subsection{Accumulated costs}
-Another approach is given by keeping an exact track of the use of contraction in the cut-elimination process.  
+We will end the part of substructural modalities with a new approach towards cut-admissibility, given by keeping an exact track of the use of contraction in the cut-elimination process.  
 The idea is that, if proving $A$ costs $b$, then any use of $A$  
 must pay this ``extra cost''. In order to keep track of this extra cost, we introduce the following notation.
 
@@ -186,7 +186,7 @@ We say that $A$ is  $\limp$-linear if for all subformulas of the form $B \limp C
 \end{definition}
 The following result presents the admissibility of an extended form of the cut rule, where the budget information from the left premise is passed to the cut-formula in the right premise. Observe that the label
 of the conclusion is now a function of the labels of the premises. Moreover, the cut-reduction is {\em label preserving}, meaning that the budget monotonically decreases in the cut-elimination process.
-\begin{theorem}[$\limp$-linear cut]
+\begin{theorem}[$\limp$-linear-cut]
 The following rule is admissible
 $$
 \infer[cut_{LL}\mbox{\quad $A$ is a $\limp$-linear formula}]{a+b: \nbang{}\Gamma,\Delta_1,\Delta_2 \seq C}{
