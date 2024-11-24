@@ -27,11 +27,11 @@ the exponential $\bang$ by the unary modal operators $\nbang{a}$
 for each $a\in\real^+$. 
 
 We shall use $A,B,C$ (resp. $\Gamma,\Delta$) to range over formulas (resp. multisets of formulas).  
-Sequents have the form $\Gamma\seq C$ where subformulas $\nbang{a}A$ will have a restriction to occur only {\em negatively} in the sequent.\footnote{The notion of polarity  is the standard one: A subformula occurrence in the antecedent of a sequent is {\em negative} if it occurs in the scope of an even number (including $0$) of contexts $([\cdot]\limp B)$, and otherwise it is {\em positive}. For occurrences of a subformula in the consequent, one replaces ``even'' by ``odd''. The reason for this restriction will be made clear in Section~\ref{sec:cut}.}
+Sequents have the form $\Gamma\seq C$ where subformulas $\nbang{a}A$ will have a restriction to occur only {\em negatively} in the sequent.\footnote{The notion of polarity  is the standard one: A subformula occurrence in the antecedent of a sequent is {\em negative} if it occurs in the scope of an even number (including $0$) of contexts $([\cdot]\limp B)$, and otherwise it is {\em positive}. For occurrences of a subformula in the consequent, one replaces ``even'' by ``odd''. The reason for this restriction will be made clear in Section~\ref{subsec:cut}.}
 %
 We denote by $\nbang{}\Gamma$ a set of formulas  prefixed with $\nbang{a}$ for some (not necessarily the same) $a\in\real^+$. 
 
-The rules for the system $\aIMALLR$ are depicted in Fig.~\ref{fig:ll}. Note that the cut rule is not included in our presentation of $\aIMALL$ and that weakening is present only implicitly, via the context $\Gamma$ in the initial sequents. Furthermore, in rule $I$, $p$ is a propositional variable and there is no right rule for $\nbang{}$ in $\aIMALLR$ since they only appear in negative polarity.
+The rules for the system $\aIMALLR$ are depicted in Figure~\ref{fig:ll}. Note that the cut rule is not included in our presentation of $\aIMALL$ and that weakening is present only implicitly, via the context $\Gamma$ in the initial sequents. Furthermore, in rule $init$, $p$ is a propositional variable and there is no right rule for $\nbang{}$ in $\aIMALLR$ since they only appear in negative polarity.
 We shall write $\vdash_{\aIMALLR} S$ if the sequent $S$ is provable in $\aIMALLR$.
 
 \begin{figure}[t]
@@ -61,13 +61,13 @@ $
 \quad 
 \infer[\oplus_{R_i}]{\Gamma \seq A_1 \oplus A_2}{\Gamma \seq A_i}
 \\\\
-\infer[I]{\Gamma,p \seq p}{} 
+\infer[init]{\Gamma,p \seq p}{} 
  \qquad
 \infer[\one_R]{\Gamma \seq \one}{}
 \qquad 
 \infer[\zero_L]{ \Gamma,\zero\seq C}{}
 \end{array}
-$}\caption{Sequent system $\aIMALLR$}
+$}\caption{The sequent system $\aIMALLR$.}
 \label{fig:ll}
 %\vspace{-0.3cm}
 \end{figure}
@@ -151,7 +151,7 @@ $\exists b\left(\wins{}{\GAIMALLR}(\{S\},b)\right)\quad\iff\quad\vdash_{\aIMALLR
 \end{theorem}
 This is a \emph{weak} adequacy since information about the budget $b$ is lost in the proof theoretic representation. In other words, the game $\GAIMALLR$ is more expressive than the calculus $\aIMALLR$.
 
-To overcome this discrepancy, we introduce a  labelled extension of $\aIMALLR$ that we call $\laIMALLR$. A $\laIMALLR$-proof is build from labelled sequents $b: \Gamma\seq A$ where $\Gamma\seq A$ is a sequent and $b\in\real^+$. The complete system is given in Fig. \ref{fig:lll}. 
+To overcome this discrepancy, we introduce a  labelled extension of $\aIMALLR$ that we call $\laIMALLR$. A $\laIMALLR$-proof is build from labelled sequents $b: \Gamma\seq A$ where $\Gamma\seq A$ is a sequent and $b\in\real^+$. The complete system is given in Figure~\ref{fig:lll}. 
 \begin{figure}[t]
 {
 \[
@@ -181,7 +181,7 @@ To overcome this discrepancy, we introduce a  labelled extension of $\aIMALLR$ t
 \\\\
 \infer[\nbang{a}_L]{c+a:\Gamma,\nbang{a}A\seq C}{c:\Gamma,\nbang{a}A,A\seq C}
 \\\\
-  \infer[I]{0:\Gamma,p \seq p}{} 
+  \infer[init]{0:\Gamma,p \seq p}{} 
  \qquad
 \infer[\one_R]{0:\Gamma \seq \one}{}
 \qquad 
@@ -189,7 +189,7 @@ To overcome this discrepancy, we introduce a  labelled extension of $\aIMALLR$ t
 \qquad 
 \infer[w_{\ell} (b\geq a)]{b: \Gamma\seq A}{a:\Gamma\seq A}
 \end{array}
-\]}\caption{The labelled sequent system $\laIMALLR$}
+\]}\caption{The labelled sequent system $\laIMALLR$.}
 \label{fig:lll}
 \end{figure}
 Now we can  prove the desired correspondence.
@@ -211,7 +211,7 @@ Now, there are many ways of proving this sequent in $\laIMALLR$. For example, th
 $$
 \infer[\nbang{500}]{500.20:\;  \nbang{500}(\nbang{0.1}C)\seq C\otimes C}
 {\infer=[\nbang{0.10} \times 2]{0.20:\;  \nbang{0.1}C\seq C\otimes C}
-{\infer=[\otimes,I]{0:\;  C,C\seq C\otimes C}{}}} 
+{\infer=[\otimes,init]{0:\;  C,C\seq C\otimes C}{}}} 
 $$
 This proof corresponds to purchasing one printer and producing two copies from it.
 
@@ -219,7 +219,7 @@ Alternatively, one could overprice the scenario by purchasing two printers and m
 $$
 \infer=[\nbang{500}  \times 2]{1,000.20:\;  \nbang{500}(\nbang{0.1}C)\seq C\otimes C}
 {\infer=[\nbang{0.10}]{0.20:\;  \nbang{0.1}C,\nbang{0.1}C\seq C\otimes C}
-{\infer=[\otimes,I]{0:\;  C,C\seq C\otimes C}{}}} 
+{\infer=[\otimes,init]{0:\;  C,C\seq C\otimes C}{}}} 
 $$
 \end{example}
 Hence, different proofs of the same sequent can lead to different costs. Nevertheless, cost-optimal strategies exist for all provable sequents, as the following result shows.\footnote{We note that the proof of this result is non-constructive!}

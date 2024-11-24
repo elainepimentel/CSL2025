@@ -103,7 +103,7 @@ $$
 The proof follows the same steps of the cut-elimination proof for $\SELL$~\cite{DBLP:conf/kgc/DanosJS93,DBLP:journals/jar/NigamM10}, 
 using natural extensions of invertibility and permutability of rules to the labelled case.
 
-Observe that this still does not define a computable function relating the labels of the premises and the conclusion of the cut rule.
+But this still does not define a computable function relating the labels of the premises and the conclusion of the cut rule.
 \subsubsection{Linearity}
 %It is worth noticing that the sole responsible for the impossibility result of Thm.~\ref{thm:impossible} is the explosive combination of the use of tensor/implication and contraction, that is, the multiplicative-sub-exponential fragment. Hence, limiting the occurrence of one or the other leads to more amenable results.
 
@@ -112,12 +112,12 @@ Now we show cases where the cut formula is restricted, starting with the case wh
 Let $A$ be a formula with no occurrences of 
 $\nbang{a}$. Then, the following rule is admissible in $\laSELLR$
 $$
-\infer[cutL]{a + b:\nbang{}\Gamma,\Delta_1,\Delta_2\seq  C}
+\infer[cut_L]{a + b:\nbang{}\Gamma,\Delta_1,\Delta_2\seq  C}
 {\deduce{a: \nbang{}\Gamma,\Delta_1 \seq A}{}&
  \deduce{b: \nbang{}\Gamma,\Delta_2, A \seq C}{}&
 }
 $$
-Moreover, if $a: \Gamma \seq C$ is provable using cutL, then there is a cut-free proof of 
+Moreover, if $a: \Gamma \seq C$ is provable using $cut_L$, then there is a cut-free proof of 
 $a': \Gamma \seq C$ with $a \geq a'$.
 \end{theorem}
 The proof uses a standard cut-reduction strategy for $\SELL$, observing in each case that the reduction of the label is possible. 
