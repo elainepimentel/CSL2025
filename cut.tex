@@ -48,7 +48,7 @@ $$
 $$
 where the upper cut has a smaller rank, and the lower cut has a smaller degree than the original cut. However, this approach fails in the labelled setting because, whenever $a < b_1$, the label increases.
 
-Although alternative reduction methods could be explored, the following result shows that it is impossible to define a labelled cut rule for \laSELLR\ where the label of the conclusion depends solely on the labels of the premises. We include the remarkable proof by Timo Lang\co{He is an author... better not to add this?}, as it is highly insightful.
+Although alternative reduction methods could be explored, the following result shows that it is impossible to define a labelled cut rule for \laSELLR\ where the label of the conclusion depends solely on the labels of the premises. We include the  proof, as it is highly insightful.
 \begin{theorem}[Impossible-cut~\cite{DBLP:conf/tableaux/LangOPF19}]\label{thm:impossible} There is no function $f:\real^+\times \real^+\rightarrow\real^+$ such that the rule
 $$
 \infer[cut]{f(a,b)\nbang{}\Gamma,\Delta_1,\Delta_2\seq C}
@@ -76,29 +76,27 @@ The theorem above indicates that, to find an admissible labelled cut rule, we mu
 \begin{enumerate}
 \item restrict the form of the cut formula;
 \item allow the labelling function $f$ to incorporate more information from the premises than just their labels;
-\item change the concept of cut. \co{this could be problematic} 
+\item keep track of the use of contraction in the cut-elimination process.
 \end{enumerate}
-
-
 
 We shall explore next
 different fragments and (admissible) cut-like rules that can be proposed for such a calculus. 
-\subsection{Infinite costs}
+\subsubsection{Infinite costs}
 We start by observing that the inclusion of ``worse costs'' entails a trivial labelling 
 that makes cut admissible. Let $\cRpi$ be the completion of $\cRp$ with $\infty$ and $\laSELLRi$ the corresponding labeled proof system with {\em decreasing} for $b\leq a$ being defined as follows:
 \begin{itemize}
 \item If $a,b\not=\infty$, $a - b$ is defined as usual;
 \item If $a=\infty$, then $a - b=\infty$.
  \end{itemize}
-In the following theorem,  the cut formula $F$ is an arbitrary formula (containing, possibly, positive and/or negative occurrences of 
+In the following theorem,  the cut formula $A$ is an arbitrary formula (containing, possibly, positive and/or negative occurrences of 
 the modality $\nbang{a}$). 
 
 \begin{theorem}[Infinite-cut]
 The following rule is admissible in $\laSELLRi$
 $$
 \infer[cut_\infty]{\infty: \nbang{}\Gamma,\Delta_1,\Delta_2 \seq C}{
- \deduce{a: \nbang{}\Gamma,\Delta_1 \seq F}{}&
-  \deduce{b:\nbang{}\Gamma,\Delta_2, F \seq C}{}
+ \deduce{a: \nbang{}\Gamma,\Delta_1 \seq A}{}&
+  \deduce{b:\nbang{}\Gamma,\Delta_2, A \seq C}{}
  }
 $$
 \end{theorem}
@@ -106,7 +104,7 @@ The proof follows the same steps of the cut-elimination proof for $\SELL$~\cite{
 using natural extensions of invertibility and permutability of rules to the labelled case.
 
 Observe that this still does not define a computable function relating the labels of the premises and the conclusion of the cut rule.
-\subsection{Linearity}
+\subsubsection{Linearity}
 %It is worth noticing that the sole responsible for the impossibility result of Thm.~\ref{thm:impossible} is the explosive combination of the use of tensor/implication and contraction, that is, the multiplicative-sub-exponential fragment. Hence, limiting the occurrence of one or the other leads to more amenable results.
 
 Now we show cases where the cut formula is restricted, starting with the case where the cut formula is $!$-free. 
@@ -150,7 +148,7 @@ where $f(b_1,b_2,a)=b_2+\lfloor b_2/a \rfloor\cdot b_1$.
 The intuition behind this labelling is as follows: if the right subproof $R$ of the $cut_{el}$ ends with the label $b_2$, then the formula $\nbang{a} A$ can be unpacked at most $\lfloor b_2/a \rfloor$ times within a multiplicative subtree of $R$. Therefore, we can assume that the rule $\nbang{a}_L$ is applied only $\lfloor b_2/a \rfloor$ times on such a subtree.
 
 %The proof of this theorem can be found in~\cite{}.
-\subsection{Accumulated costs}
+\subsubsection{Accumulated costs}
 We will end the part of substructural modalities with a new approach towards cut-admissibility, given by keeping an exact track of the use of contraction in the cut-elimination process.  
 The idea is that, if proving $A$ costs $b$, then any use of $A$  
 must pay this ``extra cost''. In order to keep track of this extra cost, we introduce the following notation.
@@ -270,8 +268,5 @@ Note that the reduction above is correct since $A$ does not have
 occurrences of $\nbang{a}$ and then  $[A]_c = [A]_{b_1}=A$. 
 \end{itemize}
 \end{proof}
-%This kind of analysis seems to be related with {\em flowgraphs} in \MELL~\cite{DBLP:journals/tcs/Strassburger03,DBLP:journals/tocl/StrassburgerG11}. 
-%
 
-Regardless of the chosen approach to enable cut-admissibility, the need for compositionality in dialogue games driven by a cut rule is a topic worth exploring~\cite{dutilh18}.
 
