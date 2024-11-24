@@ -1,13 +1,29 @@
 %!TEX root = CSL.tex
 
-Roadmap:
-\begin{itemize}
-\item Introduce SELL and the labelled game
-\item talk about cut-elimination
-%\item (maybe) generalisations?
-\item Introduce PNL and games
-\item provability games
-\item future work (CK, etc)
-\end{itemize}
+%Roadmap:
+%\begin{itemize}
+%\item Introduce SELL and the labelled game
+%\item talk about cut-elimination
+%%\item (maybe) generalisations?
+%\item Introduce PNL and games
+%\item provability games
+%\item future work (CK, etc)
+%\end{itemize}
 
+
+Modalities, both as formal constructs and as tools for reasoning, have been central to the development of logic and proof theory. In this work, we explore modalities through the lens of dialogical games, emphasizing their potential to bridge the gap between formal semantics and conceptual intuition. Games not only offer a dynamic perspective on logical systems but also serve as a unifying framework for analyzing the structure of proofs and resource management in a variety of logical settings.
+
+We begin by examining substructural calculi, inspired by resource-sensitive reasoning. This approach introduces cost labels to assumptions, complemented by a budgetary framework. Different proofs of the same end-sequent are interpreted as strategies with varying costs, enabling the development of a labeled calculus -- a fragment of Subexponential Linear Logic ($\SELL$). By generalizing the notion of costs using semirings, we provide a robust framework for analyzing proofs, extending its applications to a broader range of systems. 
+
+Beyond resource-awareness, we investigate how games can illuminate modal logics. Specifically, we focus on the positive-negative modal logic (\PNL), characterized by Kripke frames with two disjoint and symmetric reachability relations. Our interest in \PNL stems from its application in modeling phenomena such as group polarization, where interactions amplify the extremity of opinions within a network. By combining semantic games and proof systems, we propose a novel methodology for reasoning about such models.
+
+The contributions of this work can be summarized as follows:
+\begin{enumerate}
+\item Game Semantics for Resource Management: We introduce a game-theoretic perspective on proof systems that encapsulates resource-conscious reasoning. By associating costs with proof steps, we provide a fine-grained analysis of proof strategies and their computational bounds.
+\item Applications to Modal Logic: Leveraging \PNL, we construct semantic and provability games that link logical validity with winning strategies. This allows for a uniform analysis of modal systems, grounded in both game semantics and proof theory.
+\item Proof Systems and Cut-Admissibility: We present sequent calculi for \PNL, where proofs correspond to winning strategies in provability games. Furthermore, we address the challenging problem of cut-admissibility, illustrating its connection to resource management and compositionality in logical systems.
+\end{enumerate}
+This interplay between games, costs, and modalities paves the way for a deeper understanding of logical systems and their computational interpretations. By incorporating elements of hybrid logic and extending the framework to concurrent games, we establish connections between modal reasoning, resource-aware proofs, and the broader landscape of formal semantics. 
+
+In the following sections, we delve into the technical details, starting with resource-sensitive game semantics and culminating in the analysis of \PNL's provability games and corresponding proof systems.
 
