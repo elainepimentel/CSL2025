@@ -1,6 +1,6 @@
 %!TEX root = CSL.tex
 
-We now turn to the study of modalities in the classical setting, focusing on the positive-negative modal logic \PNL\ with nominals \cite{DBLP:journals/jolli/XiongA20,DBLP:journals/logcom/PedersenSA21}. This logic is based on Kripke frames with two disjoint and symmetric reachability relations. In these notes we will outline the construction of an adequate semantic game for \PNL, its transformation into a provability game, and the derivation of a corresponding sequent system. This opens a discussion of how to escalate this method to other modal systems.
+We now turn to the study of modalities in the classical setting, focusing on the positive-negative modal logic \PNL\ with nominals \cite{DBLP:journals/jolli/XiongA20,DBLP:journals/logcom/PedersenSA21}. This logic is based on Kripke frames with two disjoint and symmetric reachability relations. Here  we will outline the construction of an adequate semantic game for \PNL, its transformation into a provability game, and the derivation of a corresponding sequent system. This opens a discussion on how to generalise this method to other modal systems.
 
 We begin with a brief discussion of games for modal logics and the motivation for hybrid extensions. As studied in~\cite{blackburn-synthese} and further developed in~\cite{Robert-PhD}, extending Lorenzen-style~\cite{Lorenzen1978-LORDLJ-2} dialogue game to modal logic is conceptually straightforward: in addition to the current roles of the players and the current formula $F$, one only has to  keep track of the current world $w$ in the model. However, this extension introduces an unfortunate drawback: the {\em game trees}, \ie, labelled trees whose nodes are game states, are no longer determined solely by the syntax of the formula, but instead depend on the relational structure of the model. This is in stark contrast to semantic games for propositional logic, where semantic information is required only at the final stage to determine the winner. The loss of uniformity in game trees across all models is a significant limitation of this approach.
 
@@ -12,7 +12,7 @@ $$F  ::= p  \mid \neg F  \mid F_1  \wedge F_2  \mid F_1  \vee F_2  \mid  R^+(i,j
 where $p\in \At$, and $i,j\in N$.  Formulas of the form $p$, $R^+(i,j)$, or $R^-(i,j)$ are called \emph{elementary}. We shall use $F,G,H$ to range over formulas. 
 The propositional connectives $\top$, $\bot$, $\to$, and the (dual)  modalities $\bplus$ and $\bminus$ can be obtained in the usual way. 
 
- Intuitively, nominals are used as names for worlds of the model, while the propositions $R^\pm(i,j)$ state that agent $i$ is a  \emph{friend}/\emph{enemy} with
+Intuitively, nominals are used as names for worlds of the model, while the propositions $R^\pm(i,j)$ state that agent $i$ is a  \emph{friend}/\emph{enemy} (or, more generally, \emph{agrees}/\emph{disagrees}) with
  $j$. 
 The formula $\dplus F $ (resp. $\dminus F $) states that $F $ holds for  a friend (resp.\ an enemy). The global
 modality $[A]F $ states that $F $ holds for all the agents. 
@@ -61,12 +61,12 @@ Consider the following models (omitting self loops for $\R^+$):
 \begin{center}
 \includegraphics{fig-pnl}
 \end{center}
-The following hold:
+The following holds:
 \begin{itemize}
-\item[$\M_1$] $I$ have a friend: $\M_1, I \Vdash \dplus\top$;
-\item[$\M_2$] $I$ do not have friends: $\M_2, I \Vdash \bplus\bot$;
-\item[$\M_3$] $I$ have a friend and an enemy: $\M_3, I \Vdash \dplus \top\,\wedge \dminus\top$;
-\item[$\M_4$] Everybody has a friend where $p$: $\M_4, \ag \Vdash  [A ]  \dplus p$ for any agent $\ag$.
+\item$\M_1$: $I$ have a friend where $\neg p$: $\M_1, I \Vdash \dplus\neg p$;
+\item$\M_2$: All $my$ enemies do not believe in $p$: $\M_2, I \Vdash \bminus\neg p$;
+\item$\M_3$: $I$ have an enemy: $\M_3, I \Vdash \dminus\top$;
+\item$\M_4$: Everybody has a friend where $p$: $\M_4, \ag \Vdash  [A ]  \dplus p$ for any agent $\ag$.
 \end{itemize} 
  \end{example}
 
@@ -168,9 +168,8 @@ Let $\M$ be a \PNL-model, $\ag$ an agent with nominal $i$, and $F$ a formula.
     and   captures the idea that 
 ``the enemy of my enemy is my friend'',  ``the friend
 of my enemy is my enemy'',  and ``the friend of my friend is my friend''.
- A collectively connected network where $[A]4B$ holds is a polarized network, 
-where agents can be divided into two opposing groups \cite{balance}.
-Notions such a weak-balance \cite{weak-balance} can be also formalized in \PNL~\cite{DBLP:journals/logcom/PedersenSA21}.
+ %A collectively connected network where $[A]4B$ holds is a polarized network, 
+%where agents can be divided into two opposing groups \cite{balance}.
     $\Ic$ have a winning strategy for the game $\bfP,\ag : 4B$
     on $\bbM_1$ 
     while $\You$ have a winning strategy for the same game on $\bbM_2$ where (omitting self-loops for $\R^+$):
@@ -198,7 +197,7 @@ Notions such a weak-balance \cite{weak-balance} can be also formalized in \PNL~\
 \end{example}
 
 \subsection{Playing all models}
-We now elevate semantic games to a \PNL-provability games. The key observation is that the rules of the semantic game remain independent of the underlying model, except at the level of elementary game states.
+We now leverage semantic games to \PNL-provability games. The key observation is that the rules of the semantic game remain independent of the underlying model, except at the level of elementary game states.
 
 The {\em provability game}
 $\mathbf{DG}(\mathbf{P},i:F )$ can be thought of as \Me and \You playing all
@@ -323,7 +322,7 @@ validity} in the game. For that,  it is necessary to establish the
 formal relationship between elementary game states and logical axioms.
 
 
-\begin{lemma}\label{lemma:init}
+\begin{lemma}[\cite{LPAR2024:Reasoning_About_Group_Polarization}]\label{lemma:init}
     Let $\Gamma\seq \Delta$ be composed of elementary game states only. \Ic win the provability game in $\Gamma \seq \Delta$ iff one of the following holds\footnote{\label{foot:sym}Since relations are symmetric, we will identify $R^\pm(i,j)$ with  $R^\pm(j,i)$.} 
 %\begin{itemize}
     
@@ -346,7 +345,7 @@ The following result immediately implies that the provability game $\mathbf{DG}$
 \Ic have a winning strategy in the provability game $\mathbf{DG}(\Gamma\seq\Delta)$  iff $\Gamma\seq\Delta$ is provable in $\DS$. 
 \end{theorem}
 
-Let us write $\models_\PNL \Gamma \Rightarrow \Delta$ iff for every \PNL-model there is some $i:F \in \Gamma$ such that $\M,\g(i)\not\vdash F$, or there is some $i:G \in \Delta$ such that $\M,\g(i)\models G$. We have the following consequence of Theorems~\ref{th:adequacy},~\ref{thm:adeq}, and~\ref{thm:adequacy-sequent}: 
+Let us write $\models_\PNL \Gamma \Rightarrow \Delta$ iff for every \PNL-model there is some $i:F \in \Gamma$ such that $\M,\g(i)\not\models F$, or there is some $i:G \in \Delta$ such that $\M,\g(i)\models G$. We have the following consequence of Theorems~\ref{th:adequacy},~\ref{thm:adeq}, and~\ref{thm:adequacy-sequent}: 
 
 \begin{corollary}
 Let $\Gamma,\Delta$ be multisets of labelled formulas. Then $\models_\PNL\Gamma \Rightarrow \Delta$ iff there is a proof of $\Gamma \Rightarrow \Delta$ in $\DS$. In particular, $ F $ is \PNL-valid iff there is a proof of $\Rightarrow  F $ in $\DS$.
@@ -521,7 +520,7 @@ $
 \end{theorem}
 %For the reader interested in understanding focusing, polarities and the axioms-as-rules approach, we have added a gentle introduction in Appendix~\ref{app:focusing}. We refer to~\cite{DBLP:journals/apal/MarinMPV22} for further reading on the topic.
 As a consequence, %of Theorem~\ref{thm:cut}, 
-$\DS$ is consistent, since the only rule that can be applied in an empty sequent is $no$, and it is routine to show that it does not trivialize derivations. 
+$\DS$ is consistent, since the only rule that can be applied in an empty sequent is $no$, and it is routine to show that it does not trivialise derivations. 
 
 
 
