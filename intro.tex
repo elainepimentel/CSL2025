@@ -17,7 +17,7 @@ Modalities, both as formal constructs and as tools for reasoning, have been cent
 We begin by examining substructural calculi, inspired by resource-sensitive reasoning. 
 %
 %This approach introduces cost labels to assumptions, complemented by a budgetary framework. Different proofs of the same end-sequent are interpreted as strategies with varying costs, enabling the development of a labeled calculus -- a fragment of subexponential linear logic ($\SELL$). 
-We introduce the concept of \emph{prices} for resources (represented by formulas) into the game using the unary operator $\nbang{a}$, $a \in \real^+$, which shares some characteristic features with \emph{subexponentials} in \LL\ (\SELL~\cite{DBLP:conf/kgc/DanosJS93,nigam09ppdp}). Intuitively, a formula $\nbang{a}A$ represents a \emph{permanent resource}: from $\nbang{a}A$, we can derive $A$ as many times as needed, paying the price~$a$ each time.
+We introduce the concept of \emph{prices} for resources (represented by formulas) into the game using the unary operator $\nbang{a}$, $a \in \real^+$, which shares some characteristic features with \emph{subexponentials} in linear logic \LL\ (\SELL~\cite{DBLP:conf/kgc/DanosJS93,nigam09ppdp}). Intuitively, a formula $\nbang{a}A$ represents a \emph{permanent resource}: from $\nbang{a}A$, we can derive $A$ as many times as needed, paying the price~$a$ each time.
 
 We extend our game to this enriched language by incorporating a \emph{budget} into the game states, which decreases whenever a price is paid. Different strategies for proving the same end-sequent can then be evaluated based on the budget required to execute them safely, \ie, without incurring debt. This approach to resource-consciousness not only enhances the game but also translates naturally into a sequent system, where cost bounds for proofs are expressed as labels attached to sequents. By associating costs with proof steps, we provide a fine-grained analysis of proof strategies and their computational bounds.
 
@@ -25,26 +25,42 @@ We note that, up to this point, the content summarises the work presented in~\ci
 
 In Section~\ref{subsec:cut}, we introduce new perspectives by allowing modalities in positive contexts. This includes the addition of ``worse costs,'' linearisation of the cut formula, and tracking the use of contraction during the cut-elimination process.
 
-In the second part of the paper we go beyond resource-awareness, showing how games can illuminate modal logics. Specifically, we focus on the positive-negative modal logic (\PNL~\cite{DBLP:journals/jolli/XiongA20}), characterised by Kripke frames with two disjoint and symmetric reachability relations. Our interest in \PNL\ stems from its application in modelling phenomena such as group polarisation, where interactions amplify the extremity of opinions within a network. 
-
+In the second part of this paper, we present
+an overview of our work in~\cite{LPAR2024:Reasoning_About_Group_Polarization},
+going beyond resource-awareness, and showing how games can illuminate modal
+logics. Specifically, we focus on the positive-negative modal logic
+(\PNL~\cite{DBLP:journals/jolli/XiongA20}), characterised by Kripke frames with
+two disjoint and symmetric reachability relations. 
 In \PNL, individuals in a
-social network are identified with worlds of the frame, and they are related
-either as ``friends'' (positive) or as ``enemies'' (negative), but not both at
-the same time. These relationships can be understood in different ways: Instead
-of genuine friendship or enduring enmity, they may simply signify agreement or
+social network are identified with worlds of the frame, and the associated relations represent
+either ``friends'' (positive) or as ``enemies'' (negative).
+These relationships can be understood in different ways: Instead
+of genuine friendship or enduring enmity, they may simply mean agreement or
 disagreement on a particular issue. 
+Our interest in \PNL\ stems
+from its application in modelling phenomena such as group polarisation, where
+interactions amplify the extremity of opinions within a network. 
+We show how the dialogical game lenses lead to both 
+a semantic game and a
+provability game for (hybrid) extensions of \PNL.
 
-We take inspiration from a work by Pedersen, Smets, and {\AA}gnotes
-\cite{DBLP:journals/logcom/PedersenSA21}, where \PNL~is extended in
-various ways to axiomatically characterise modally undefinable frame
-properties.
+
+%We take inspiration from a work by Pedersen, Smets, and {\AA}gnotes
+%\cite{DBLP:journals/logcom/PedersenSA21}, where \PNL~is extended in
+%various ways to axiomatically characterise modally undefinable frame
+%properties.
  
-Here, we present an overview of our work in~\cite{LPAR2024:Reasoning_About_Group_Polarization}. Our approach to logical reasoning about group polarisation is also based on \PNL~but focuses on a different aspect of formal reasoning about the corresponding models through games and proof systems. Specifically, we introduce both a semantic game and a provability game for (hybrid) extensions of \PNL.
+%Here, we present an overview of our work
+%Our approach to logical
+%reasoning about group polarisation is also based on \PNL~but focuses on a
+%different aspect of formal reasoning about the corresponding models through
+%games and proof systems. Specifically, we introduce both 
 
 In semantic games~\cite{Hintikka1973-HINLLA-2}, each instance is played over a formula $F$ and a model $\M$ by two players, traditionally called \Ic (or \Me) and \You. At every point in the game, one player acts as the proponent ($\mathbf P$), while the other acts as the opponent ($\mathbf O$) of the current formula. The set of actions at each stage is determined by the main connective of the current formula.
 
 In contrast, provability games~\cite{Lorenzen1978-LORDLJ-2} do not concern truth in a specific model but rather {\em logical validity}. These games are also played by two participants, \Me and \You, and involve attacking assertions of formulas made by the other player and defending against these attacks.
 
-We conclude this summary by showing how to transform the semantic game over single models into a provability game that characterises logical validity. This transformation led to {\em the first} Gentzen-style systems for variants of \PNL, which modularly adapt to different frame properties by faithfully capturing the rules for \emph{elementary} games. All the proposed games are accompanied by a prototypical implementation~\cite{tool} using rewriting logic and Maude~\cite{DBLP:journals/jlp/Meseguer12,DBLP:journals/jlap/DuranEEMMRT20}.
+We conclude this summary by showing how to transform the semantic game over single models into a provability game that characterises logical validity. This transformation led to {\em the first} Gentzen-style systems for variants of \PNL, which modularly adapt to different frame properties by faithfully capturing the rules for \emph{elementary} games. 
+%All the proposed games are accompanied by a prototypical implementation~\cite{tool} using rewriting logic and Maude~\cite{DBLP:journals/jlp/Meseguer12,DBLP:journals/jlap/DuranEEMMRT20}.
 
 Each part concludes with a discussion of future research directions and methodologies for combining and adapting the frameworks presented here to other logics and systems.
