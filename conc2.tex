@@ -1,1 +1,26 @@
 %!TEX root = CSL.tex
+
+There are a number of different directions to follow from this work.
+
+The first aspect worth exploring is the lifting of the semantic-provability-proof system approach to different systems described by Kripke semantics. For example, it would be really interesting to propose games to logics involving model-change modalities~\cite{DBLP:journals/logcom/Velazquez-Quesada17,DBLP:journals/igpl/PerrotinV21}, and to logics involving dynamic modalities~\cite{DBLP:journals/synthese/BenthemGL08}. 
+
+Currently, we are exploring extensions that relax
+symmetry assumptions, allowing for representing situations where agent $a$ may
+influence the opinion of $b$ but not the other way around. Additionally, we are
+investigating the concept of ``budget'' as in the game proposed in
+\cite{DBLP:conf/tableaux/LangOPF19} to characterize scenarios where proponents
+and opponents operate within a limited \emph{political capital}, where
+adding/changing relations can potentially decrease such a capital. 
+To this end, the preference of spending as little capital as possible could be expressed in a combination of $\PNL$ with a suitable \emph{choice logic}, i.e., a logic where preferences are definable at the object level. Semantic games for choice logics have been investigated in \cite{Freiman2023TruthLogic} and the lifting of game-induced choice logic, \textbf{GCL}, to a provability game and proof system was demonstrated in \cite{Freiman2023}.
+Finally, following
+the techniques developed in \cite{DBLP:journals/jlap/OlartePR23} 
+for analyzing sequent systems in rewrite logic, we are extending 
+our tool \cite{tool} to also support the sequent calculi proposed here. 
+
+This work can be seen as a continuation of a program of lifting semantic games
+to analytic calculi \cite{DBLP:journals/sLogica/FermullerM09,Pavlova2021}. Our
+approach is a refinement of previous work on modal logic
+\cite{DBLP:conf/wollic/Freiman21,HybrJour}  as it replaces model checking at
+the level of axioms with explicit rules for the classes of $\PNL$ and
+$\cc$-$\PNL$ models. We therefore  provide hand-tailored systems for reasoning about
+group polarization and opens up the aforementioned routes to mechanization.
