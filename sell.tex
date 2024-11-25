@@ -88,9 +88,9 @@ a premise sequent in which the game continues; or
 \end{enumerate}
 \end{itemize}
 The choice between $(i)$ and $(ii)$ depends on the nature of the rule:
-branching in {\em additive rules} is modeled as choices made by \II, while branching in {\em multiplicative rules} involves \I splitting the context into two disjoint parts, which then serve as the corresponding contexts for two subgames played in parallel. Consequently, the state of the game is represented by a \textit{multiset of sequents}, with each sequent belonging to a distinct subgame.
+branching in {\em additive rules} is modelled as choices made by \II, while branching in {\em multiplicative rules} involves \I splitting the context into two disjoint parts, which then serve as the corresponding contexts for two subgames played in parallel. Consequently, the state of the game is represented by a \textit{multiset of sequents}, with each sequent belonging to a distinct subgame.
 
-Now, to capture the notion of {\em costs}, game states include a {\em budget} (modeled as a real number) that decreases whenever the rule $\nbang{}_L$ is applied. This implies a cost $a$ is incurred during dereliction, \ie, when unpacking a formula stored within the modality $\nbang{a}{}$.
+Now, to capture the notion of {\em costs}, game states include a {\em budget} (modelled as a real number) that decreases whenever the rule $\nbang{}_L$ is applied. This implies a cost $a$ is incurred during dereliction, \ie, when unpacking a formula stored within the modality $\nbang{a}{}$.
 %
 Formally we have the following.
 \begin{definition}[The game $\GAIMALLR$]\label{definition:GAIMALLR}
@@ -203,7 +203,7 @@ However, the broader implications are even more interesting, as illustrated in t
 \begin{example}
 Suppose that a printer costs \$500 and it produces copies for \$0.1. Which is the budget needed for making 2 copies?
 
-Since buying a printer and making a copy can be modeled as  $\nbang{500}(\nbang{0.1}C)$, the goal is to find possible budgets for 
+Since buying a printer and making a copy can be modelled as  $\nbang{500}(\nbang{0.1}C)$, the goal is to find possible budgets for 
 $$
 b:\;  \nbang{500}(\nbang{0.1}C)\seq C\otimes C
 $$
