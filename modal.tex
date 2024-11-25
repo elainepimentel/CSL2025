@@ -35,8 +35,8 @@ The Kripke semantics of \PNL~is in \Cref{fig:ksem}.
 A formula $F$ is true over $\mathbb{M}$, written $\mathbb{M}\Vdash F$ iff
 $\mathbb{M},\ag\Vdash F$, for all agent $\ag\in\A$. For a set of formulas
 $\Delta$, we write $\mathbb{M}\models \Delta$ iff $\mathbb{M}\Vdash \Delta$ for all $F
-\in \Delta$. A formula $F$ is ((\cc-)\PNL-) valid iff $\mathbb{M}\Vdash F$ for every
-((\cc-)\PNL)-model $\mathbb{M}$. For a class of models $\mathfrak{M}$, we write
+\in \Delta$. A formula $F$ is valid iff $\mathbb{M}\Vdash F$ for every
+\PNL-model $\mathbb{M}$. For a class of models $\mathfrak{M}$, we write
 $\Delta\models_{\mathfrak{M}} F$ iff $\mathbb{M}\Vdash F$ for every model
 $\mathbb{M}\in \mathfrak{M}$ with $\mathbb{M}\models \Delta$. 
 
@@ -152,7 +152,7 @@ The following hold:
 
 
 \subsection{Playing with models}\label{sec:game-semantics}
-Before starting playing, remember that in a \PNL-model $\M$, every agent $\ag$ has a name $i$, \ie, there exists $i\in N$ s.t. $\g(i)=\ag$. Hence, from now on, we will internalise the nominals, identifying an agent $\ag$ with the respective nominal $i$.
+Before starting playing, remember that in a \PNL-model $\M$, every agent $\ag$ has a name $i$, \ie, there exists $i\in N$ s.t. $\g(i)=\ag$. Hence, from now on, we will internalise the nominals, identifying an agent $\ag$ with its respective nominal $i$.
 
 The  \emph{semantic game} is played over a \PNL-model $\M=(\A,\R^+,\R^-,\V,\g)$ by two
 players, \Me (or \Ic) and \You, who argue about the truth of a formula $ F $ at an
