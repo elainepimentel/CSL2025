@@ -2,7 +2,7 @@
 
 We begin by noting that establishing cut-admissibility in $\laIMALLR$ critically relies on the ability to define a computable function $f$ that relates the cost of the end-sequent to the labels of the premises in the cut rule.
 %
-Given that exponentials only occur negatively in $\laIMALLR$, no cut steps involve banged formulas. This enables us to demonstrate that $f(a,b) = a + b$ is the {\em minimal} such function.
+Given that exponentials only occur negatively in $\laIMALLR$, no cut steps involve banged formulas. This allows us to demonstrate that $f(a,b) = a + b$ is the {\em minimal} such function.
 \begin{theorem}[Negative-cut~\cite{DBLP:conf/tableaux/LangOPF19}]\label{thm:cutAdm}
 For $f(a,b)=a+b$, the following cut rule is admissible in $\laIMALLR$:
 $$
@@ -13,7 +13,7 @@ $$
 $$
 Moreover, whenever $cut_\ell$ is admissible w.r.t. a given $f'$, then $a+b\leq f'(a,b)$.
 \end{theorem}
-It turns out that extending cost-conscious reasoning to modalities occurring {\em positively} in sequents is far from straightforward.
+It turns out that extending cost-conscious reasoning to modalities occurring {\em positively} in sequents is far from trivial. 
 %
 While an intuitive game-theoretic interpretation of promotion could be provided in the style of~\cite{DBLP:conf/tableaux/FermullerL17}, this {\em does not} align with a proof-theoretic notion of cut-admissibility. This is due to the inherent difficulty in defining a functional notion of the cut-label, as demonstrated below.
 
@@ -80,7 +80,7 @@ The theorem above indicates that, to find an admissible labelled cut rule, we mu
 \end{enumerate}
 
 We shall explore next
-different fragments and (admissible) cut-like rules that can be proposed for such a calculus. 
+different fragments and (admissible) cut-like rules that can be proposed for $\laSELLR$.
 \subsubsection{Infinite costs}
 We start by observing that the inclusion of ``worse costs'' entails a trivial labelling 
 that makes cut admissible. Let $\cRpi$ be the completion of $\cRp$ with $\infty$ and $\laSELLRi$ the corresponding labeled proof system with {\em decreasing} for $b\leq a$ being defined as follows:
@@ -141,7 +141,7 @@ Since the formulas used in the proof of Theorem \ref{thm:impossible} can be simp
 \begin{theorem}[Exp-labelled-cut~\cite{Timo-PhD}]\label{theorem:cut}
 For any simply exp-labelled formula $\nbang{a} A $, the following cut rule is admissible in $\laSELLR$:
 $$
-\infer[cut_{el}]{f(b_1,b_2,a):\,!\Gamma,\Delta_1,\Delta_1\seq \Pi}{b_1:\,!\Gamma,\Delta_1\seq  \nbang{a} A  & b_2:\,!\Gamma,\Delta_2,\nbang{a} A \seq \Pi}
+\infer[cut_{el}]{f(b_1,b_2,a):\,!\Gamma,\Delta_1,\Delta_1\seq C}{b_1:\,!\Gamma,\Delta_1\seq  \nbang{a} A  & b_2:\,!\Gamma,\Delta_2,\nbang{a} A \seq C}
 $$
 where $f(b_1,b_2,a)=b_2+\lfloor b_2/a \rfloor\cdot b_1$.
 \end{theorem}
@@ -149,9 +149,9 @@ The intuition behind this labelling is as follows: if the right subproof $R$ of 
 
 %The proof of this theorem can be found in~\cite{}.
 \subsubsection{Accumulated costs}
-We will end the part of substructural modalities with a new approach towards cut-admissibility, given by keeping an exact track of the use of contraction in the cut-elimination process.  
+We will end the part of substructural modalities with a new approach towards cut-admissibility, where  we keep track of the use of contraction in the cut-elimination process.  
 The idea is that, if proving $A$ costs $b$, then any use of $A$  
-must pay this ``extra cost''. In order to keep track of this extra cost, we introduce the following notation.
+must pay this ``extra cost''. For that, we introduce the following notation.
 
 \begin{definition}
 Let $\cE=\{a_b\mid a,b\in \cRp\}$ be such that 
@@ -166,7 +166,7 @@ modality $\nbang{a_b}{}$ with $\nbang{a_{b+c}}$.
 Hence $\laSELLR$ can be slightly modified so that sequent labels belong to  $\cRp$, while modal labels belong to $\cE$. Due to the ordering above, the promotion of $\nbang{a_0}$ 
 has the same effect/constraints that the promotion of $\nbang{a_b}$. However, the dereliction of the latter requires a greater budget ($a+b$ instead of $a$). Moreover, the equivalence $\nbang{a_b}A \equiv \nbang{a_c}A$ can be proven, each direction requiring a different budget.
 Finally, note that $\cE_0=\{a_0\mid a\in \cRp\}\simeq \cRp$, that is, each element $a\in\cRp$ can be seen as the equivalence class of $a_0$ in $\cRp\times \cRp$ modulo $\cRp$.
-We will abuse the notation and continue representing the resulting system by $\laSELLR$, also unchanging the representation of sequents. 
+We will abuse of the notation and continue representing the resulting system by $\laSELLR$, also unchanging the representation of sequents. 
 
 
 The following lemma has a straightforward proof.
@@ -176,7 +176,7 @@ $b': \Gamma, A \seq C$
 with $b \geq b'$. More generally,  if $b:\Gamma, [A]_c \seq C$ and $c \geq c'$ then
 $b':\Gamma, [A]_{c'} \seq C$ with $b \geq b'$. 
 \end{lemma}
-The next definition restricts the appearance of unbounded modalities 
+The next definition restricts the occurrence of unbounded modalities 
 only under linear implication.
 \begin{definition}
 We say that $A$ is  $\limp$-linear if for all subformulas of the form $B \limp C$ in $A$, $B$ is bang-free.
