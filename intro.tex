@@ -1,4 +1,5 @@
 %!TEX root = CSL.tex
+% !TEX spellcheck = en-UK
 
 %Roadmap:
 %\begin{itemize}
@@ -11,22 +12,70 @@
 %Remember: semirings and extensions, discussion about modal systems, CK etc.
 %\end{itemize}
 
-\blue{EP. ChatGPT poorly generated. To be modified.}
+Modalities, both as formal constructs and as tools for reasoning, have been central to the development of logic and proof theory. In this work, we explore modalities through the lens of dialogical games, emphasising their potential to bridge the gap between formal semantics and conceptual intuition. Games not only offer a dynamic perspective on logical systems but also serve as a unifying framework for analysing the structure of proofs and resource management in a variety of logical settings.
 
-Modalities, both as formal constructs and as tools for reasoning, have been central to the development of logic and proof theory. In this work, we explore modalities through the lens of dialogical games, emphasizing their potential to bridge the gap between formal semantics and conceptual intuition. Games not only offer a dynamic perspective on logical systems but also serve as a unifying framework for analyzing the structure of proofs and resource management in a variety of logical settings.
+We begin by examining substructural calculi, inspired by resource-sensitive reasoning. 
+%
+%This approach introduces cost labels to assumptions, complemented by a budgetary framework. Different proofs of the same end-sequent are interpreted as strategies with varying costs, enabling the development of a labeled calculus -- a fragment of subexponential linear logic ($\SELL$). 
+We introduce the concept of \emph{prices} for resources (represented by formulas) into the game using the unary operator $\nbang{a}$, $a \in \real^+$, which shares some characteristic features with \emph{subexponentials} in \LL\ (\SELL~\cite{DBLP:conf/kgc/DanosJS93,nigam09ppdp}). Intuitively, a formula $\nbang{a}A$ represents a \emph{permanent resource}: from $\nbang{a}A$, we can derive $A$ as many times as needed, paying the price~$a$ each time.
 
-We begin by examining substructural calculi, inspired by resource-sensitive reasoning. This approach introduces cost labels to assumptions, complemented by a budgetary framework. Different proofs of the same end-sequent are interpreted as strategies with varying costs, enabling the development of a labeled calculus -- a fragment of subexponential linear logic ($\SELL$). 
-%By generalizing the notion of costs using semirings, we provide a robust framework for analyzing proofs, extending its applications to a broader range of systems. 
+We extend our game to this enriched language by incorporating a \emph{budget} into the game states, which decreases whenever a price is paid. Different strategies for proving the same end-sequent can then be evaluated based on the budget required to execute them safely, \ie, without incurring debt. This approach to resource-consciousness not only enhances the game but also translates naturally into a sequent system, where cost bounds for proofs are expressed as labels attached to sequents. By associating costs with proof steps, we provide a fine-grained analysis of proof strategies and their computational bounds.
 
-Beyond resource-awareness, we investigate how games can illuminate modal logics. Specifically, we focus on the positive-negative modal logic (\PNL), characterized by Kripke frames with two disjoint and symmetric reachability relations. Our interest in \PNL\ stems from its application in modeling phenomena such as group polarization, where interactions amplify the extremity of opinions within a network. By combining semantic games and proof systems, we propose a novel methodology for reasoning about such models.
+We note that, up to this point, the content summarises the work presented in~\cite{DBLP:conf/tableaux/LangOPF19}, where resources were considered only in {\em assumptions}. In this setting, sequents are restricted by limiting the occurrences of the modality $\nbang{a}$ {\em negatively}, thereby eliminating the need for a promotion rule.
 
-The contributions of this work can be summarized as follows:
-\begin{enumerate}
-\item Game Semantics for Resource Management: We introduce a game-theoretic perspective on proof systems that encapsulates resource-conscious reasoning. By associating costs with proof steps, we provide a fine-grained analysis of proof strategies and their computational bounds.
-\item Applications to Modal Logic: Leveraging \PNL, we construct semantic and provability games that link logical validity with winning strategies. This allows for a uniform analysis of modal systems, grounded in both game semantics and proof theory.
-\item Proof Systems and Cut-Admissibility: We present sequent calculi for \PNL, where proofs correspond to winning strategies in provability games. Furthermore, we address the challenging problem of cut-admissibility, illustrating its connection to resource management and compositionality in logical systems.
-\end{enumerate}
-This interplay between games, costs, and modalities paves the way for a deeper understanding of logical systems and their computational interpretations. By incorporating elements of hybrid logic and extending the framework to concurrent games, we establish connections between modal reasoning, resource-aware proofs, and the broader landscape of formal semantics. 
+In Section~\ref{subsec:cut}, we introduce new perspectives by allowing modalities in positive contexts. This includes the addition of ``worse costs,'' linearisation of the cut formula, and tracking the use of contraction during the cut-elimination process.
 
-In the following sections, we delve into the technical details, starting with resource-sensitive game semantics and culminating in the analysis of \PNL's provability games and corresponding proof systems.
+In the second part of the paper we go beyond resource-awareness, showing how games can illuminate modal logics. Specifically, we focus on the positive-negative modal logic (\PNL~\cite{DBLP:journals/jolli/XiongA20}), characterised by Kripke frames with two disjoint and symmetric reachability relations. Our interest in \PNL\ stems from its application in modelling phenomena such as group polarisation, where interactions amplify the extremity of opinions within a network. 
+
+In \PNL, individuals in a
+social network are identified with worlds of the frame, and they are related
+either as ``friends'' (positive) or as ``enemies'' (negative), but not both at
+the same time. These relationships can be understood in different ways: Instead
+of genuine friendship or enduring enmity, they may simply signify agreement or
+disagreement on a particular issue. 
+
+We take inspiration from a work by Pedersen, Smets, and {\AA}gnotes
+\cite{DBLP:journals/logcom/PedersenSA21}, where \PNL~is extended in
+various ways to axiomatically characterise modally undefinable frame
+properties.
+ 
+Our approach to logical reasoning about group
+polarisation is also based on \PNL~but focuses on a different aspect
+of formal reasoning about the corresponding models via games and proof systems. In semantic games~\cite{Hintikka1973-HINLLA-2}, every instance of the game is played over a formula $F$ and a model $\M$ by two players, usually called \Ic (or \Me) and \You. At each point in the game, one of the players acts as the proponent ($\mathbf P$), while the other acts as the opponent ($\mathbf O$) of the current formula. The set of actions at each stage is dictated by the main connective of the current formula. 
+In contrast to semantic games, provability games~\cite{Lorenzen1978-LORDLJ-2} do not refer to truth in a particular model but to {\em logical validity}. The game is also played by two players, \Me and \You, and consists of attacking assertions of formulas made by the other player and defending against these attacks. In this work, we will introduce both a semantic game and a provability game for (hybrid) extensions of \PNL.
+
+We will give a view of the start by proposing a 
+semantic game that characterises
+the truth in a given network model. %by the interaction of two antagonistic players trying to verify or falsify a given formula. 
+This provides an
+alternative to the standard definition of an evaluation function which supports
+a dynamic form of reasoning about concrete network models (\Cref{sec:pnl}).}
+We move on by arguing that effective formal reasoning with the relevant logics requires more
+than (just) Hilbert-style axiom systems. Rather, the automated search for
+proofs calls for Gentzen-style systems that respect ({a restricted form of}) the
+subformula property. In proof-theoretic terms, we are looking for a cut-free
+sequent system. Hence, our next step is to turn the semantic game over single
+models into a provability game (\Cref{sec:dis-game}), characterising logical validity. To this end,
+we define disjunctive states for a game that is not restricted to a single
+model, but systematically explores the truth in all models. This method %of
+%transforming semantic games into proof games has been successfully applied to
+%various many-valued logics
+%\cite{DBLP:journals/sLogica/FermullerM09,DBLP:journals/lu/FermullerLP22} and
+%recently also to hybrid logic \cite{DBLP:conf/wollic/Freiman21}. Here, it 
+leads
+to {\em the first} Gentzen-style systems  for variants of \PNL~(\Cref{sec:proofs}), which
+modularly adapts to different frame properties by faithfully capturing the rules 
+for \emph{elementary} games.
+%(game states  consisting of atomic formulas). 
+
+Models of social learning and opinion dynamics aim to understand the role of certain social factors in the acceptance/rejection of opinions. They can be useful to explain alternative scenarios, such as consensus or polarisation. In this context, the positive and negative relationships are not permanent. Instead, they can vary over time when
+\emph{enemies} reconcile, new \emph{friendships}/agreements emerge, or some actors begin to disagree with others. In \Cref{sec:extensions}, we show how the {\em global adding} and {\em local link change}  modalities  of
+\cite{DBLP:journals/logcom/PedersenSA21} (inspired by sabotage modal logic
+\cite{DBLP:journals/igpl/ArecesFH15,DBLP:journals/logcom/AucherBG18, DBLP:journals/logcom/BenthemLSY23})
+can be defined in our framework.
+{As a plus, we present in \cite{tool} a 
+prototypical implementation of the proposed games 
+using rewriting logic and Maude \cite{DBLP:journals/jlp/Meseguer12,DBLP:journals/jlap/DuranEEMMRT20}.}
+Detailed proofs and further examples can be found in the technical report \cite{tech-report}. 
+
 
