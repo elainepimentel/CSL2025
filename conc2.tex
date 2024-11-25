@@ -1,26 +1,14 @@
 %!TEX root = CSL.tex
 
-There are a number of different directions to follow from this work.
+This work opens up several promising directions for future exploration.
 
-The first aspect worth exploring is the lifting of the semantic-provability-proof system approach to different systems described by Kripke semantics. For example, it would be really interesting to propose games to logics involving model-change modalities~\cite{DBLP:journals/logcom/Velazquez-Quesada17,DBLP:journals/igpl/PerrotinV21}, and to logics involving dynamic modalities~\cite{DBLP:journals/synthese/BenthemGL08}. 
+In terms of variations on the present work, it would be interesting to explore extensions of \PNL\ that relax symmetry assumptions, enabling the representation of scenarios where an agent $a$ can influence the opinion of agent $b$, but not vice versa. Another potential direction involves incorporating the concept of a ``budget,'' as introduced in the game discussed in the first part of this paper~\cite{DBLP:conf/tableaux/LangOPF19}, to model situations where proponents and opponents operate under a limited amount of political capital. In such scenarios, adding or modifying relationships could reduce this capital.
 
-Currently, we are exploring extensions that relax
-symmetry assumptions, allowing for representing situations where agent $a$ may
-influence the opinion of $b$ but not the other way around. Additionally, we are
-investigating the concept of ``budget'' as in the game proposed in
-\cite{DBLP:conf/tableaux/LangOPF19} to characterize scenarios where proponents
-and opponents operate within a limited \emph{political capital}, where
-adding/changing relations can potentially decrease such a capital. 
-To this end, the preference of spending as little capital as possible could be expressed in a combination of $\PNL$ with a suitable \emph{choice logic}, i.e., a logic where preferences are definable at the object level. Semantic games for choice logics have been investigated in \cite{Freiman2023TruthLogic} and the lifting of game-induced choice logic, \textbf{GCL}, to a provability game and proof system was demonstrated in \cite{Freiman2023}.
-Finally, following
-the techniques developed in \cite{DBLP:journals/jlap/OlartePR23} 
-for analyzing sequent systems in rewrite logic, we are extending 
-our tool \cite{tool} to also support the sequent calculi proposed here. 
+To formalize this idea, preferences for minimizing the expenditure of political capital could be expressed through a combination of \PNL\ with a suitable choice logic -- a framework where preferences are explicitly definable at the object level. Semantic games for choice logics have been explored in~\cite{Freiman2023TruthLogic}, and the extension of game-induced choice logic (\textbf{GCL}) to a provability game and proof system was proposed in~\cite{Freiman2023}. 
+%Investigating these integrations offers a compelling avenue for further research.
 
-This work can be seen as a continuation of a program of lifting semantic games
-to analytic calculi \cite{DBLP:journals/sLogica/FermullerM09,Pavlova2021}. Our
-approach is a refinement of previous work on modal logic
-\cite{DBLP:conf/wollic/Freiman21,HybrJour}  as it replaces model checking at
-the level of axioms with explicit rules for the classes of $\PNL$ and
-$\cc$-$\PNL$ models. We therefore  provide hand-tailored systems for reasoning about
-group polarization and opens up the aforementioned routes to mechanization.
+Another particularly interesting avenue is extending the semantic-provability-proof system approach to other logics characterized by Kripke semantics. For instance, it would be worthwhile to investigate games for logics that involve model-change modalities~\cite{DBLP:journals/logcom/Velazquez-Quesada17,DBLP:journals/igpl/PerrotinV21} or dynamic modalities~\cite{DBLP:journals/synthese/BenthemGL08}. Initial progress in this direction was made in~\cite{LPAR2024:Reasoning_About_Group_Polarization}, where we showed how the global link-adding and local link-changing modalities from~\cite{DBLP:journals/logcom/PedersenSA21} (inspired by sabotage modal logic~\cite{DBLP:journals/igpl/ArecesFH15,DBLP:journals/logcom/AucherBG18,DBLP:journals/logcom/BenthemLSY23}) can be incorporated into our framework.
+
+This extension is motivated by the study of social learning and opinion dynamics, which aim to understand how specific social factors influence the acceptance or rejection of opinions. Such models can provide insights into scenarios like consensus, polarization, and fragmentation. In these contexts, positive and negative relationships between agents are not fixed; they evolve over time. For example, enemies may reconcile, new friendships or agreements may form, or agents may develop disagreements. Exploring these dynamics within our framework offers a compelling direction for future research. 
+
+Finally, we would like very much to investigate the availability of using this framework to propose games to constructive/intuitionistic modal logics. In particular, for the constructive logic $\CK$
