@@ -167,7 +167,8 @@ i: F $.
 
 We call a game state \emph{elementary} if its involved formula is elementary. For a game state $g$, we denote the game starting at $g$ over the model $\M$ by $\mathbf{G}_\M(g)$.
 
-The game over a \PNL-model $\M$ proceeds by reducing the involved formula $ F $ to an elementary formula by following the rules described in Figure~\ref{fig:game-rules}.
+The game over a \PNL-model $\M$ proceeds by reducing the involved formula $ F $ to an elementary formula by following the rules described in Figure~\ref{fig:game-rules}.\footnote{The outcome of the game state $\mathbf{Q},k:R^{\pm}(i,j)$ is independent of $k$ (it only depends on the underlying model $\M$). Hence, we write 
+        $\mathbf{Q},\_:R^\pm(i,j)$ instead of $\mathbf{Q},k:R^\pm(i,j)$.\label{foot:R}}
 
 
 \begin{figure}
@@ -222,9 +223,9 @@ the adequacy of the proposed game semantics with respect to the Kripke semantics
 \begin{definition}
     A \emph{strategy} for \Me in the game $\mathbf{G}_\M(g)$ is a subtree $\sigma$ of the associated game tree such that: 
  \textbf{(1)} $g\in \sigma$,
- \textbf{(2)} if $h\in \sigma$ is a node labeled ``Y'', then all children of $h$ are in $\sigma$,
- \textbf{(3)} if $h\in \sigma$ is a node labeled ``I'', then exactly one child of $h$ is in $\sigma$.
-The strategy $\sigma$ is called \emph{winning} if all leaves in the tree $\sigma$ are labeled ``I''. (Winning) strategies for \You are defined dually.
+ \textbf{(2)} if $h\in \sigma$ is a node labelled ``Y'', then all children of $h$ are in $\sigma$,
+ \textbf{(3)} if $h\in \sigma$ is a node labelled ``I'', then exactly one child of $h$ is in $\sigma$.
+The strategy $\sigma$ is called \emph{winning} if all leaves in the tree $\sigma$ are labelled ``I''. (Winning) strategies for \You are defined dually.
 \end{definition}
 
 \begin{theorem}[Adequacy - semantic games~\cite{LPAR2024:Reasoning_About_Group_Polarization}]%\label{winningstrategy}
@@ -371,11 +372,11 @@ in the second subgame, the final state is $\mathbf{P},i: p \bigvee
 Theorems~\ref{th:adequacy} and \ref{thm:adeq} establish that winning strategies for \Me in the provability game correspond to the validity of formulas. In this section, we extend this result to proof systems by introducing a sequent calculus, 
 $\DS$, where proofs correspond to \My's winning strategies in the provability game.
 
-{\em Labeled nominal formulas} are either \emph{labeled formulas} of
+{\em Labelled nominal formulas} are either \emph{labelled formulas} of
 the form $i: F $ or \emph{relational atoms} of the form $R(i,j)$,
 where $i$ and $j$ are nominals and $ F $ is a \PNL~formula.%
-\footnote{Observe that here we are abusing the notation, identifying $k:R(i,j)$ with $R(i,j)$.} \emph{Labeled sequents} have the form $\Gamma \seq \Delta$, where
-$\Gamma,\Delta$ are multisets containing labeled nominal formulas.
+\footnote{Observe that here we are abusing the notation, identifying $k:R(i,j)$ with $R(i,j)$ -- see Footnote~\ref{foot:R}.} \emph{Labelled sequents} have the form $\Gamma \seq \Delta$, where
+$\Gamma,\Delta$ are multisets containing labelled nominal formulas.
 
 Starting with sequents, every provability state of the form
 \begin{center}
@@ -383,11 +384,11 @@ $
 \mathbf{O},i_1:  F_1\bigvee \ldots \bigvee \mathbf{O},i_n:  F_n\bigvee\mathbf{P},j_1: G_1 \bigvee \ldots \bigvee \mathbf{P},j_m: G_m
 $
 \end{center}
- can be rewritten as the labeled sequent $\Gamma \seq \Delta$ where
+ can be rewritten as the labelled sequent $\Gamma \seq \Delta$ where
 $
 \Gamma =\{i_1: F_1, \ldots, i_n: F_n\}\mbox{ and } \Delta =\{j_1: G_i,\ldots,j_m: G_m\}
 $. 
-In what follows, we will not distinguish between provability states and their corresponding labeled sequent. For example,
+In what follows, we will not distinguish between provability states and their corresponding labelled sequent. For example,
 the provability game state
 $\mathbf{O},i:(\dplus\dplus p \vee \dminus\dminus p)\bigvee\mathbf{P},i: \dplus p$
 will be identified with the sequent  
@@ -412,22 +413,7 @@ formal relationship between elementary game states and logical axioms.
 
     \noindent\textbf{iii.} $\Gamma\cap\Delta\not=\emptyset$.
 \end{lemma}
-
-\begin{comment}
-Observe that the models are 
-\begin{itemize}
-\item [-] non overlapping: if $(\g(i),\g(j))\in \R^{\pm}$, thus by definition if $R^\pm(i,j)\in \Gamma$, then by 
-$\neg$(ii) $R^\mp(i,j)\notin \Gamma$, %, and by  $\neg$(iii)  $R^\pm(i,j)\not\in \Delta$. 
-hence $(\g(i),\g(j))\notin \R^{\mp}$.
-\item[-] $\R^-$"-irreflexivity: $\neg$(i) implies that $(\g(i),\g(i))\notin \R^{-}$;
-\item[-] in the case of collectively connectedness, we complete $\mathbb{M}$ as follows: for all $R^\pm(i,j)\in\Delta$, 
-add $(\g(i),\g(j))\in \R^{\mp}$; and for all remaining nominals $k,l$ appearing in $\Gamma\seq\Delta$ such that $R^\pm(k,l)\notin \Gamma,\Delta$, add $(\g(k),\g(l))\in \R^{+}$. Observe that $\neg(iii)$ plus 
- $\neg$(iv) guarantee the non-overlapping. 
-\end{itemize}
-In both cases, the defined models are such that  \You win in $g$ over $\M$, whenever $g\in D$.
-\end{comment}
-
-Figure~\ref{fig:calculus} presents the labeled sequent systems $\DS$ with the standard initial axiom and structural/propositional  rules. The modal  rules and the relational rules $sym$ and  $ref\pm$  coincides with the modal rules originally presented by Vigan\`{o} in~\cite{Vigano:2000}, adapted to multi-relational modal logics. 
+Figure~\ref{fig:calculus} presents the labelled sequent systems $\DS$ with the standard initial axiom and structural/propositional  rules. The modal  rules and the relational rules $sym$ and  $ref\pm$  coincides with the modal rules originally presented by Vigan\`{o} in~\cite{Vigano:2000}, adapted to multi-relational modal logics. 
 %
 It is routine to show that the rule $no$ in Figure~\ref{fig:calculus} correspond to the non-overlapping  axiom
 $
@@ -443,7 +429,7 @@ The following result immediately implies that the provability game $\mathbf{DG}$
 Let us write $\models_\PNL \Gamma \Rightarrow \Delta$ iff for every \PNL-model there is some $i:F \in \Gamma$ such that $\M,\g(i)\not\vdash F$, or there is some $i:G \in \Delta$ such that $\M,\g(i)\models G$. We have the following consequence of Theorems~\ref{th:adequacy},~\ref{thm:adeq}, and~\ref{thm:adequacy-sequent}: 
 
 \begin{corollary}
-Let $\Gamma,\Delta$ be multisets of labeled formulas. Then $\models_\PNL\Gamma \Rightarrow \Delta$ iff there is a proof of $\Gamma \Rightarrow \Delta$ in $\DS$. In particular, $ F $ is \PNL-valid iff there is a proof of $\Rightarrow  F $ in $\DS$.
+Let $\Gamma,\Delta$ be multisets of labelled formulas. Then $\models_\PNL\Gamma \Rightarrow \Delta$ iff there is a proof of $\Gamma \Rightarrow \Delta$ in $\DS$. In particular, $ F $ is \PNL-valid iff there is a proof of $\Rightarrow  F $ in $\DS$.
 \end{corollary}
 
 \begin{figure}[ht]
@@ -589,12 +575,12 @@ Let $\Gamma,\Delta$ be multisets of labeled formulas. Then $\models_\PNL\Gamma \
      %is formed by the initial axiom plus the structural, propositional, relational and modal rules.  
      In the rule init, $F_{el}$ denotes an
 elementary formula. In the rules   $(L_{\Diamond^\pm})_1$,
-$(L_{\Diamond^\pm})_2$, and $(R_{[A]})$,  the nominal $j$ is fresh.% (this condition corresponds to \emph{Your} optimal choice). 
-The rule
+$(L_{\Diamond^\pm})_2$, and $(R_{[A]})$,  the nominal $j$ is fresh.
+ The rule
 $R_{\meddiamondminus}$ has the proviso that $i\neq j$.  \label{fig:calculus} } 
 \end{figure}
 
-Proving cut-admissibility of labeled systems can be cumbersome due to the presence of relational rules. %(see \eg\ \cite{negri99aml}).
+Proving cut-admissibility of labelled systems can be cumbersome due to the presence of relational rules. %(see \eg\ \cite{negri99aml}).
 %Moreover, it is usually done in a case-by-case analysis, tailored for each system (see \eg\ \cite{negri99aml}). 
 %
 In~\cite{DBLP:journals/apal/MarinMPV22}, a systematic procedure for
@@ -615,7 +601,7 @@ $
 \end{theorem}
 %For the reader interested in understanding focusing, polarities and the axioms-as-rules approach, we have added a gentle introduction in Appendix~\ref{app:focusing}. We refer to~\cite{DBLP:journals/apal/MarinMPV22} for further reading on the topic.
 As a consequence, %of Theorem~\ref{thm:cut}, 
-$\DS/\DS$ are consistent, since the only rules that can be applied in an empty sequent is $no$ and it is routine to show that it does not trivialize derivations. 
+$\DS$ is consistent, since the only rule that can be applied in an empty sequent is $no$, and it is routine to show that it does not trivialize derivations. 
 
 
 
