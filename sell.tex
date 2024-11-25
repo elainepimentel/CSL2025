@@ -9,7 +9,7 @@ $$
 $$
 with a denumerable infinite set of propositional variables $\{p, q, r, \ldots\}$, the units $\{\zero,\one\}$,  the binary connectives for additive conjunction and disjunction $\{\with,\oplus\}$, the multiplicative conjunction $\tensor$, the  linear implication $\lolli$, and the exponential $\bang$.
 
-Similar to modal connectives, the exponential $\bang$ in intuitionistic linear logic  is not {\em canonical}, in the sense that, even having the same scheme for introduction rules, marking the exponentials with different labels  does not preserve equivalence. That is, if  $i\not= j$ then
+Similar to modal connectives, the exponential $\bang$ in linear logic  is not {\em canonical}, in the sense that, even having the same scheme for introduction rules, marking the exponentials with different labels  does not preserve equivalence. That is, if  $i\not= j$ then
 $\nbang{i}A\not\equiv\nbang{j}A$.
 %
 Intuitively, this means that we can mark the exponential with {\em labels} taken from a set $\mathcal{I}$ organized in a pre-order $\preceq$ (\ie, a reflexive and transitive relation), obtaining (possibly infinitely-many) exponentials $\nbang{i}$
@@ -18,9 +18,9 @@ As in multi-modal systems, the pre-order  determines the provability relation:
 for a general formula $A$, $\nbang{b}A$ {\em implies} $\nbang{a}A$ iff $a \preceq b$.
 %
 Pre-ordering the labels (together with an upward closeness requirement)
-guarantees cut-elimination in $\SELL$~\cite{DBLP:conf/kgc/DanosJS93}. 
+guarantees cut-elimination in $\SELL$~\cite{DBLP:conf/kgc/DanosJS93}.
 
-The algebraic structure of subexponentials, combined with their intrinsic structural property allow for the proposal of rich linear logic based frameworks. This opened a venue for proposing different multi-modal substructural logical systems, that encountered a number of different applications (see~\cite{DBLP:conf/fscd/PimentelON21} for a survey). 
+The algebraic structure of subexponentials, combined with their intrinsic structural properties (weakening and contraction) allow for the proposal of rich linear logic based frameworks. This opened a venue for proposing different multi-modal substructural logical systems~\cite{DBLP:journals/mscs/XavierOP22}, that encountered a number of different applications (see~\cite{DBLP:conf/fscd/PimentelON21} for a survey). 
 
 In this paper, we will use subexponentials to model the notion of {\em costs}. We will start by considering the particular case where labels will be elements of $\real^+$, the set of non-negative real numbers, with the usual pre-order $\leq$. Formally, we substitute in $\aILL$
 the exponential $\bang$ by the unary modal operators $\nbang{a}$ 
@@ -31,7 +31,7 @@ Sequents have the form $\Gamma\seq C$ where subformulas $\nbang{a}A$ will have a
 %
 We denote by $\nbang{}\Gamma$ a set of formulas  prefixed with $\nbang{a}$ for some (not necessarily the same) $a\in\real^+$. 
 
-The rules for the system $\aIMALLR$ are depicted in Figure~\ref{fig:ll}. Note that the cut rule is not included in our presentation of $\aIMALL$ and that weakening is present only implicitly, via the context $\Gamma$ in the initial sequents. Furthermore, in rule $init$, $p$ is a propositional variable and there is no right rule for $\nbang{}$ in $\aIMALLR$ since they only appear in negative polarity.
+The rules for the system $\aIMALLR$ are depicted in Figure~\ref{fig:ll}. Note that the cut rule is not included in our presentation of $\aIMALL$ and that weakening is present only implicitly, via the context $\Gamma$ in the initial sequents. Furthermore, in rule $init$, $p$ is a propositional variable and there is no right rule for $\nbang{}$ in $\aIMALLR$ since this connective only appears in negative polarity.
 We shall write $\vdash_{\aIMALLR} S$ if the sequent $S$ is provable in $\aIMALLR$.
 
 \begin{figure}[t]
@@ -130,17 +130,17 @@ We can model the matching pair by the disjunction $(w\tensor w)\oplus(b\tensor b
 \begin{quote}
 What is the least budget $n$  such that $\wins{}{\GAIMALLR}(\nbang{1}(w\oplus b)\seq (w\tensor w)\oplus(b\tensor b),n)$?
 \end{quote}
-The following play illustrate that $n=3$ suffices, where $F=(w\tensor w)\oplus(b\tensor b)$ and $G=\nbang{1}(w\oplus b)$:
+The following play illustrates that $n=3$ suffices, where $F=(w\tensor w)\oplus(b\tensor b)$ and $G=\nbang{1}(w\oplus b)$:
 \begin{enumerate}
 \item $(\{G\seq F\},3)$ 
 \item $(\{G, w\oplus b, w\oplus b, w\oplus b\seq F\},0)$ ($3\times$ budget decrease)
 \item $(\{G, w, w\oplus b, w\oplus b\seq F\},0)$ ($\II$ chooses $w$)
 \item $(\{G, w, b, w\oplus b\seq F\},0)$ ($\II$ chooses $b$)
 \item $(\{G, w, b, b\seq F\},0)$ ($\II$ chooses $b$)
-\item $(\{G, w, b, b\seq b\otimes b\},0)$ 
-\item $(\{G, w, b\seq b\}\cup \{G, b\seq b\},0)$ (parallelism)
+\item $(\{G, w, b, b\seq b\otimes b\},0)$  ($\I$ plays $\oplus_{R_2}$)
+\item $(\{G, w, b\seq b\}\cup \{G, b\seq b\},0)$ ($\I$ plays $\tensor_R$, parallelism)
 \end{enumerate}
-The other possible choices for $\II$ are similar or simpler, and that $n=2$ is not enough for winning the game.
+The other possible choices for $\II$ are similar or simpler, and show that $n=2$ is not enough for winning the game.
 \end{example}
 We note that it is not necessary to consider all possible strategies in $\GAIMALLR$: For example, \I never needs to take the budget into account when deciding the next move. Also, it is easy to see that a~$\aIMALLR$-proof $\pr$ of a sequent $S$ translates to a w.s. in $(\{S\},b)$ for some \textit{sufficiently large} budget $b$. Taking these observations together, one can prove the following.
 \begin{theorem}[Weak adequacy for $\GAIMALLR$~\cite{DBLP:conf/tableaux/LangOPF19}]
